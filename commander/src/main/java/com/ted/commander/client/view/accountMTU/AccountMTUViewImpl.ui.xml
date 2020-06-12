@@ -1,0 +1,109 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             xmlns:p='urn:import:com.petecode.common.client.widget.paper'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+             xmlns:mgwt="urn:import:com.googlecode.mgwt.ui.client.widget"
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+
+
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="reqStringRes" type="com.ted.commander.client.resources.RequiredWebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+    <ui:style field="localStyle">
+        .deleteButton[raised] {
+            background-color: red;
+        }
+
+        .card {
+            min-width: 600px;
+        }
+
+
+    </ui:style>
+
+
+    <mgwt:panel.flex.RootFlexPanel orientation="HORIZONTAL" addStyleNames="{style.css.fullPage}">
+        <g:ScrollPanel ui:field="frameScrollPanel">
+            <mgwt:panel.flex.FlexPanel orientation="HORIZONTAL" addStyleNames="{style.css.fullWidth}">
+                <mgwt:panel.flex.FlexSpacer/>
+                <mgwt:panel.flex.FlexPanel orientation="VERTICAL" addStyleNames="{style.css.fullWidth}">
+                    <w:toolbar.TitleBar ui:field="titleBar" backButton="true">
+                        <ui:msg>Account MTU</ui:msg>
+                    </w:toolbar.TitleBar>
+                    <mgwt:panel.flex.FlexPanel orientation="HORIZONTAL">
+                        <mgwt:panel.flex.FlexSpacer/>
+                        <mgwt:panel.flex.FlexPanel orientation="VERTICAL">
+
+                            <g:HTMLPanel>
+                                <div class="{style.css.vertical} {style.css.alignCenter} {style.css.card} {style.css.shadow}">
+
+                                    <div class="{style.css.captionText}"
+                                         style="max-width:580px; text-align:center; margin-bottom:16px">
+                                        <ui:msg>
+                                            Monitoring points should be edited as necessary under each Location.
+                                            Monitoring Points Deleted from Account Page will have history permanently
+                                            erased.
+                                        </ui:msg>
+                                    </div>
+
+                                    <div class="{style.css.horizontal} {style.css.tile} {style.css.fullWidth}">
+                                        <span style="flex:1"></span>
+                                        <div class="{style.css.vertical} {style.css.alignStart}">
+                                            <p:PaperLabel ui:field="typeField" width="100px">
+                                                <ui:msg>Device Type</ui:msg>
+                                            </p:PaperLabel>
+
+                                            <span style="height:16px"></span>
+
+                                            <p:PaperLabel ui:field="mtuSerialNumber" width="100px">
+                                                <ui:msg>Serial Number</ui:msg>
+                                            </p:PaperLabel>
+
+                                            <span style="height:16px"></span>
+                                            <p:PaperLabel ui:field="descriptionField">
+                                                <ui:msg>Description</ui:msg>
+                                            </p:PaperLabel>
+
+                                            <span style="height:16px"></span>
+                                            <p:PaperLabel ui:field="measurementType">
+                                                <ui:msg>Measurement Type</ui:msg>
+                                            </p:PaperLabel>
+                                        </div>
+
+                                        <span style="flex:1"></span>
+                                    </div>
+
+                                    <span style="height:16px"></span>
+
+                                    <div class="{style.css.horizontal} {style.css.tile} {style.css.fullWidth}">
+                                        <span style="flex:1"></span>
+                                        <pw:PaperButton raised="true" ui:field="deleteButton"
+                                                       addStyleNames="{localStyle.deleteButton}">
+                                            <ui:msg>Delete</ui:msg>
+                                        </pw:PaperButton>
+                                        <span style="flex:1"></span>
+                                    </div>
+                                </div>
+                            </g:HTMLPanel>
+
+                            <mgwt:panel.flex.FixedSpacer height="10px"/>
+                            <mgwt:panel.flex.FlexSpacer/>
+                        </mgwt:panel.flex.FlexPanel>
+                        <mgwt:panel.flex.FlexSpacer/>
+                    </mgwt:panel.flex.FlexPanel>
+                </mgwt:panel.flex.FlexPanel>
+                <mgwt:panel.flex.FlexSpacer/>
+            </mgwt:panel.flex.FlexPanel>
+        </g:ScrollPanel>
+    </mgwt:panel.flex.RootFlexPanel>
+
+</ui:UiBinder>

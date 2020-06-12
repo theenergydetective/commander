@@ -1,0 +1,19 @@
+<html>
+<body>
+<h3>Dear ${inviteeEmail}, </h3>
+
+<div>
+    You have been invited to join TED Commander by ${originator.formattedName}. To activate your account, please click on the following link or cut and
+    paste it into our browser.:
+</div>
+<h3><a href="http://${serverInfo.serverName}/index.html?inviteKey=${securityKey}">
+             http://${serverInfo.serverName}/index.html?inviteKey=${securityKey}
+    </a>
+</h3>
+
+Thanks, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://${serverInfo.serverName}">TED Commander</a>
+
+</body>
+
+</html>

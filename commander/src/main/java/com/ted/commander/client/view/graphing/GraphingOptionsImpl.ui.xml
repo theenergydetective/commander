@@ -1,0 +1,201 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:style field="localStyle" src="../../style/commanderStyle.gss" type="com.ted.commander.client.style.CommanderStyle" gss="true">
+        .max {
+            width: 100%;
+            height: 100%;
+        }
+
+        .allSubloads {
+            padding: 8px;
+            border: 0px solid DIVIDER_COLOR;
+            border-bottom-width: 1px;
+        }
+
+        .divider {
+            margin-top: 16px;
+            margin-bottom: 16px;
+            width: 100%;
+            height: 1px;
+            border: 0px solid DIVIDER_COLOR;
+            border-bottom-width: 1px;
+        }
+    </ui:style>
+
+
+    <g:HTMLPanel addStyleNames="{localStyle.max}" ui:field="mainPanel">
+        <style is="custom-style">
+            paper-material {
+                background-color: #FFF;
+                margin-top: 8px;
+                margin-bottom: 8px;
+                padding-top:16px;
+                padding-bottom:16px;
+                padding-left:8px;
+                padding-right:8px;
+                width:100%;
+                max-width:1024px;
+            }
+        </style>
+
+        <pw:PaperHeaderPanel mode="standard" shadow="true">
+
+            <pw:PaperToolbar>
+                <w:toolbar.TitleBar ui:field="titleBar" backButton="true">
+                    <ui:msg key="dashboardKey">Graphing Options</ui:msg>
+                </w:toolbar.TitleBar>
+            </pw:PaperToolbar>
+
+
+            <div class="horizontal layout">
+                <div class="flex"></div>
+                <div class="vertical center layout">
+
+                    <!-- Calendar -->
+                    <pw:PaperMaterial elevation="2" ui:field="dashboardNavigationCard"
+                                      addStyleNames="vertical center layout">
+
+                        <div class="paper-font-body1">
+                            <ui:msg>Please select the location and data points for graphing.</ui:msg>
+                        </div>
+                        <w:LocationPicker ui:field="locationPicker" popupWidth="600px">
+                            <ui:msg>Location</ui:msg>
+                        </w:LocationPicker>
+                        <g:VerticalPanel ui:field="dataPointPanel"/>
+
+
+                        <div ui:field="subloadField" class="vertical center layout" style="width:100%">
+                            <div class="{localStyle.divider}"></div>
+
+                            <div class="paper-font-body1">
+                                <ui:msg>Do you want to graph Individual MTU and Spyder Monitoring Points?</ui:msg>
+                            </div>
+
+                            <paper-radio-group ui:field="subloadGroup">
+                                <paper-radio-button name="TRUE"><ui:msg>Yes</ui:msg></paper-radio-button>
+                                <paper-radio-button name="FALSE"><ui:msg>No</ui:msg></paper-radio-button>
+                            </paper-radio-group>
+
+
+
+                            <div ui:field="subloadDataPointField">
+                                <paper-checkbox ui:field="allSubloadButton" addStyleNames="{localStyle.allSubloads}">
+                                    <ui:msg>All Subloads</ui:msg>
+                                </paper-checkbox>
+                                <g:VerticalPanel ui:field="subloadDataPointPanel"/>
+                            </div>
+
+                        </div>
+
+                        <div class="{localStyle.divider}"></div>
+
+                        <div class="paper-font-body1">
+                            <ui:msg>Select data point to be shown as Area Graph.</ui:msg>
+                        </div>
+
+                        <paper-radio-group ui:field="graphLineTypeGroup">
+                            <paper-radio-button name="NONE" ui:field="noneField">
+                                <ui:msg>None</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="NET" ui:field="netField">
+                                <ui:msg>NET</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="GENERATION" ui:field="generationField">
+                                <ui:msg>Generation</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="LOAD" ui:field="loadField">
+                                <ui:msg>Load</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="TEMPERATURE" ui:field="tempField">
+                                <ui:msg>Temperature</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="WIND_SPEED">
+                                <ui:msg>Wind</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="CLOUD_COVERAGE">
+                                <ui:msg>Cloud Coverage</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button ui:field="demandCostRadio" name="DEMAND_COST">
+                                <ui:msg>Demand Cost</ui:msg>
+                            </paper-radio-button>
+                        </paper-radio-group>
+
+                        <div class="{localStyle.divider}"></div>
+
+                        <div class="paper-font-body1">
+                            <ui:msg>Please select type of data you would like to graph</ui:msg>
+                        </div>
+
+                        <paper-radio-group ui:field="graphTypeGroup">
+                            <paper-radio-button name="ENERGY">
+                                <ui:msg>Energy</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="COST">
+                                <ui:msg>Cost</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="DEMAND">
+                                <ui:msg>Demand</ui:msg>
+                            </paper-radio-button>
+                        </paper-radio-group>
+
+                        <div class="{localStyle.divider}"></div>
+
+                        <div class="paper-font-body1">
+                            <ui:msg>Please select the time frame you would like to graph.</ui:msg>
+                        </div>
+                        <paper-radio-group ui:field="historyTypeGroup">
+                            <paper-radio-button name="MINUTE">
+                                <ui:msg>Minute</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="HOURLY">
+                                <ui:msg>Hour</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="DAILY">
+                                <ui:msg>Day</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="BILLING_CYCLE">
+                                <ui:msg>Billing Cycle</ui:msg>
+                            </paper-radio-button>
+                        </paper-radio-group>
+
+                        <div class="{localStyle.divider}"></div>
+
+                        <div class="paper-font-body1">
+                            <ui:msg>Please select the date.</ui:msg>
+                        </div>
+                        <w:datePicker.DatePicker ui:field="datePicker"/>
+
+
+                        <div class="horizontal center layout" style="width:100%">
+                            <div class="flex"></div>
+                            <pw:PaperButton ui:field="cancelButton">
+                                <ui:msg>Cancel</ui:msg>
+                            </pw:PaperButton>
+                            <pw:PaperButton ui:field="exportButton">
+                                <ui:msg>Graph</ui:msg>
+                            </pw:PaperButton>
+                        </div>
+
+                    </pw:PaperMaterial>
+                </div>
+                <div class="flex"></div>
+
+            </div>
+            <!-- Content -->
+
+
+        </pw:PaperHeaderPanel>
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

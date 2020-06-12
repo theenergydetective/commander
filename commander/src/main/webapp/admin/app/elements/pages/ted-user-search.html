@@ -1,0 +1,186 @@
+<!--
+@license
+Copyright (c) 2015 The Energy Detective. All Rights Reserved
+-->
+
+<dom-module id="ted-user-search">
+  <style>
+    :host {
+      display: block;
+    @apply(--layout-vertical);
+    }
+    .horizontal{
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+      width:100%;
+    }
+    .vertical {
+    @apply(--layout-vertical);
+    @apply(--layout-center);
+    }
+
+    .background {
+      width:100%;
+      height:100%;
+      position:absolute;
+      top:0;
+      left:0;
+      @apply(--layout-vertical);
+      background-color: var(--primary-light-background-color);
+    }
+
+    .cardContent{
+      width:100%;
+      @apply(--layout-vertical);
+      min-width:320px;
+      max-width:1024px;
+      background: #FFF;
+      margin-bottom:24px;
+    }
+
+
+    .item {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        @apply(--layout-around-justified);
+        padding: 20px;
+        background-color: white;
+        cursor: pointer; cursor: hand;
+        border: solid;
+        border-width: 0;
+        border-bottom-width:1px;
+        border-color: var(--divider-color);
+    }
+
+  </style>
+  <template>
+
+    <iron-ajax id="get_user_ajax"
+               url="/api/admin/userSearch"
+               handle-as="json"
+               loading="{{loading}}"
+               last-response="{{users}}"
+               on-error="onError"
+               auto="false"
+               >
+      </iron-ajax>
+
+
+    <content>
+      <div class="background">
+        <paper-header-panel main mode="standard">
+
+          <!-- Main Toolbar -->
+          <paper-toolbar id="mainToolbar">
+            <paper-icon-button icon="arrow-back"  on-click="onBackClick"></paper-icon-button>
+            <div class="paper-font-headline" >User Search</div>
+            <span class="flex"></span>
+            <paper-spinner active="{{loading}}"></paper-spinner>
+          </paper-toolbar>
+
+          <!-- Main Content -->
+          <div class="horizontal">
+            <div style="flex:1"/>
+            <div class="vertical">
+              <div class="horizontal">
+                <div class="flex"></div>
+                <iron-icon icon="search"></iron-icon>
+                <paper-input id="searchField" floatingLabel="false" label="Search" value="{{searchFilter}}" on-change="onRefreshList"></paper-input>
+                <div class="flex"></div>
+                <span class="paper-font-caption" style="margin-right:16px">Sort By:</span>
+                <ted-user-sortby-picker  id="sortByPicker" on-selected="onSortSelected"></ted-user-sortby-picker>
+                <div class="flex"></div>
+
+              </div>
+
+
+                <!--<iron-list items="[[users]]" as="item">-->
+                <paper-material elevation="2" class="cardContent" style="">
+                  <template is="dom-repeat" items="[[users]]">
+                      <div class="item" on-click="itemSelected">
+                        <div class="paper-font-body1" style="overflow:hidden;width:250px;text-overflow: ellipsis;">[[item.username]]</div>
+                        <div class="paper-font-body1" style="overflow:hidden;width:150px;text-overflow: ellipsis;">
+                          <span>[[item.lastName]]</span> , <span>[[item.firstName]]</span></div>
+                        <div class="paper-font-body1" style="width:150px">[[calcDate(item.joinDate)]]</div>
+                        <div class="paper-font-body1" style="width:75px">[[item.userState]]</div>
+                        <iron-icon icon="chevron-right"/>
+                      </div>
+                  </template>
+                </paper-material>
+                <!--</iron-list>-->
+
+            </div>
+            <div style="flex:1"/>
+          </div>
+
+
+        </paper-header-panel>
+      </div>
+    </content>
+  </template>
+</dom-module>
+<script>
+  (function() {
+    Polymer({
+      is: 'ted-user-search',
+      properties: {
+        _logger: Object,
+        index: {
+          type:Number,
+          value:0
+        },
+        sortBy: {
+          type: Number,
+          value: 0
+        }
+      },
+      listeners:{
+
+      },
+      created: function(){
+        this._logger = LoggerFactory.getLogger(this);
+        this._logger.debug('Created');
+      },
+      calcDate: function(epoch){
+        var date = new Date(epoch);
+        return (date.getMonth()+1) + '/' + date.getDate() + '/' + (date.getYear() + 1900);
+      },
+      onPageSelected: function(){
+        this._logger.info('Selected');
+        this.$.sortByPicker.defaultValue = 0;
+        // Refresh Data
+        this.onRefreshList();
+      },
+      onBackClick: function(){
+        page('/login');
+      },
+      onSortSelected: function(r){
+        this._logger.debug('List Refresh: Sort', r.detail);
+        this.sortBy = r.detail;
+        this.onRefreshList();
+      },
+      onRefreshList: function(){
+        this._logger.debug('List Refresh: Filter' + this.searchFilter);
+
+        var params = {
+          rows : 1000,
+          sortBy: this.sortBy,
+          filter: this.searchFilter,
+          index: this.index
+        };
+        this._logger.debug('params: ' + JSON.stringify(params));
+        this.$.get_user_ajax.params = params;
+        this.$.get_user_ajax.headers = {'Authorization': 'Bearer ' + window.sessionStorage.getItem('ACCESS_TOKEN')};
+        this.$.get_user_ajax.generateRequest();
+      },
+      onError: function(){
+        //page('/logout');
+      },
+      itemSelected:function(r){
+        this._logger.debug('Selected ' + JSON.stringify(r.model.item));
+        page('/userAdmin/' + r.model.item.id);
+      },
+
+    });
+  })();
+</script>

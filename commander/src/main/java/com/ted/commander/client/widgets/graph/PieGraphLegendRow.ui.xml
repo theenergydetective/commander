@@ -1,0 +1,34 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:style field="localStyle">
+        .nameStyle{
+            text-overflow: ellipsis;
+            font-family: 'Roboto', serif;
+            font-size: 10pt;
+            font-weight: 500;
+            opacity: .87;
+        }
+
+        .valueStyle {
+            font-family: 'Roboto', serif;
+            font-size: 10pt;
+            font-weight: 400;
+            opacity: .87;
+        }
+
+    </ui:style>
+
+    <g:HTMLPanel addStyleNames="horizontal top start layout">
+        <div class="paper-font-body2 {localStyle.nameStyle}" style="width:80px; padding-right:8px" ui:field="nameField"></div>
+        <div class="paper-font-body1 {localStyle.valueStyle}" style="width:110px; padding-right: 8px" ui:field="energyField"></div>
+        <div class="paper-font-body1 {localStyle.valueStyle}" style="width:110px" ui:field="costField"></div>
+    </g:HTMLPanel>
+</ui:UiBinder>

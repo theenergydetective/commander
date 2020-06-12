@@ -1,0 +1,113 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:style field="localStyle" gss="true">
+        .listBox{
+            font-family: 'Roboto', 'Noto', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: transparent;
+            border-top-width: 0;
+            border-left-width: 0;
+            border-right-width: 0;
+            border-color: black;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            width:300px;
+            margin-bottom:4px;
+        }
+
+        .caption {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            line-height: 14px;
+            color: #727272;
+        }
+    </ui:style>
+
+    <g:HTMLPanel ui:field="mainPanel">
+
+        <style is="custom-style">
+
+            .toggleText {
+                margin-left: 16px;
+            }
+
+            .dialog {
+                background-color:#FFF;
+                padding:24px;
+                padding-bottom:0px;
+                color: var(--paper-dialog-color, --primary-text-color);
+                @apply(--paper-font-body1);
+                @apply(--shadow-elevation-16dp);
+            }
+
+            .dialogButton {
+                margin-left:16px;
+                cursor: pointer;
+                cursor: hand;
+            }
+
+            .dialogHeader {
+                position: relative;
+                margin: 0;
+                @apply(--paper-font-title);
+            }
+
+            .dialogContent {
+                margin-top: 20px;
+                padding: 0;
+                padding-bottom:24px;
+                @apply(--paper-font-body1);
+            }
+
+            .buttons {
+                height:52px;
+                margin: 0;
+                color: var(--paper-dialog-button-color, --primary-color);
+                @apply(--layout-horizontal);
+                @apply(--layout-center);
+                @apply(--layout-end-justified);
+            }
+
+
+        </style>
+
+        <paper-material class="dialog" ui:field="dialog" style="background-color:#FFF">
+            <div class="dialogHeader"><ui:msg>Trigger</ui:msg></div>
+
+            <div class="dialogContent" style="width:320px">
+
+                <div class="{localStyle.caption}"><ui:msg>Send the alarm</ui:msg></div>
+                <g:ListBox  ui:field="triggerTypeListBox" addStyleNames="{localStyle.listBox}"></g:ListBox>
+                <g:SimplePanel ui:field="triggerPanel"></g:SimplePanel>
+            </div>
+
+            <div class="buttons">
+                <paper-button class="{style.css.clickable} dialogButton" ui:field="cancelButton">
+                    <ui:msg>Cancel</ui:msg>
+                </paper-button>
+                <paper-button class="{style.css.clickable} dialogButton" style="color:red" ui:field="deleteButton">
+                    <ui:msg>Delete</ui:msg>
+                </paper-button>
+                <paper-button class="{style.css.clickable} dialogButton" ui:field="addButton">
+                    <ui:msg>Add</ui:msg>
+                </paper-button>
+                <paper-button class="{style.css.clickable} dialogButton" ui:field="saveButton">
+                    <ui:msg>Save</ui:msg>
+                </paper-button>
+            </div>
+        </paper-material>
+
+    </g:HTMLPanel>
+
+</ui:UiBinder>

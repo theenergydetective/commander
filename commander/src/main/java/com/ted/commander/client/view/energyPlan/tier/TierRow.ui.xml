@@ -1,0 +1,24 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+
+    <g:HTMLPanel>
+    <div class="{style.css.horizontal} {style.css.alignCenter}" style="padding-bottom:8px">
+        <div class="{style.css.captionText}" style="width:75px; padding-right:16px" ui:field="tierLabel"/>
+        <div class="{style.css.body1Text}" style="width:75px; padding-right:16px" ui:field="fromLabel"/>
+        <w:NumericTextBox  width="72px" ui:field="toBox" placeHolder="{stringRes.requiredField}" decimalPlaces="0" minValue="0" maxValue="1000000000" addStyleNames="{style.css.body1Text}"/>
+        <div class="{style.css.captionText}" style="font-size:8pt">
+            <ui:msg>kWh</ui:msg>
+        </div>
+    </div>
+    </g:HTMLPanel>
+
+</ui:UiBinder>

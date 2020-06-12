@@ -1,0 +1,18 @@
+<html>
+<body>
+<h3>Dear ${user.username}, </h3>
+
+<div>
+    Thank you for registering with TED Commander. To activate your account, please click on the following link or cut and
+    paste it into our browser.:
+</div>
+<h3><a href="http://${serverInfo.serverName}/index.html?accountActivationKey=${securityKey}&username=${username}">
+             http://${serverInfo.serverName}/index.html?accountActivationKey=${securityKey}&username=${username}
+</a></h3>
+
+Thanks, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://${serverInfo.serverName}">TED Commander</a>
+
+</body>
+
+</html>

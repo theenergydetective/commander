@@ -1,0 +1,85 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:p='urn:import:com.petecode.common.client.widget.paper'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+
+    <ui:with field="paperStyleBundle" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+    <ui:with field="badgeRes" type="com.ted.commander.client.resources.BadgeImageResource"/>
+    <ui:style field="localStyle">
+        .smallLogoButton {
+            padding-right: 30px;
+            height: 19px;
+            text-align: right;
+            font-family: Arial Unicode MS, Arial, sans-serif;
+            font-size: 12pt;
+            cursor: pointer;
+            cursor: hand;
+            color: #333;
+
+        }
+    </ui:style>
+
+    <g:HTMLPanel addStyleNames="vertical center center-center layout {paperStyleBundle.css.fullPage}">
+        <style is="custom-style">
+            paper-material {
+            min-width: 320px;
+            padding:16px;
+            width:320px;
+
+
+            }
+        </style>
+
+
+        <img src="" ui:field="logo"></img>
+
+        <pw:PaperMaterial addStyleNames="vertical center layout">
+            <p:PaperInputDecorator addStyleNames="{paperStyleBundle.css.fullWidth}" label="{stringRes.email}"
+                                   ui:field="emailAddressField"/>
+            <p:PaperInputDecorator addStyleNames="{paperStyleBundle.css.fullWidth}" label="{stringRes.password}"
+                                   ui:field="passwordField" type="password"/>
+            <div style="height:8px"/>
+            <pw:PaperButton ui:field="loginButton" raised="true">Login</pw:PaperButton>
+        </pw:PaperMaterial>
+
+        <div class="horizontal justified layout" style="margin:8px">
+            <g:Image resource="{badgeRes.google}" ui:field="googleBadge" addStyleNames="{paperStyleBundle.css.clickable}"/>
+            <div class="flex" style="width:32px"></div>
+            <g:Image resource="{badgeRes.apple}" ui:field="appleBadge" addStyleNames="{paperStyleBundle.css.clickable}"/>
+            <div class="flex" style="width:32px"></div>
+            <g:Image resource="{badgeRes.fire}" ui:field="fireBadge" addStyleNames="{paperStyleBundle.css.clickable}"/>
+        </div>
+
+        <div class="vertical end layout" style="width:360px;padding:16px">
+                <pw:PaperButton ui:field="forgotPasswordButton" addStyleNames="{localStyle.smallLogoButton}">
+                    <div class="horizontal center layout">
+                        <span style="padding-right:8px">
+                            <ui:msg>Forgot Password?</ui:msg>
+                        </span>
+                        <img src="" ui:field="joinIconImg"/>
+                    </div>
+                </pw:PaperButton>
+                <div style="height:16px"></div>
+                <pw:PaperButton ui:field="signUpButton" addStyleNames="{localStyle.smallLogoButton}">
+                    <div class="horizontal center layout">
+                        <span style="padding-right:8px">
+                            <ui:msg>Join</ui:msg>
+                        </span>
+                        <img src="" ui:field="signUpButtonImg"></img>
+                    </div>
+                </pw:PaperButton>
+
+        </div>
+    </g:HTMLPanel>
+</ui:UiBinder>

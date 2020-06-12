@@ -1,0 +1,180 @@
+
+<dom-module id="ted-login">
+    <style>
+        :host {
+            display: block;
+            @apply(--layout-vertical);
+        }
+
+        .background {
+            width:100%;
+            height:100%;
+            position:absolute;
+            top:0;
+            left:0;
+            background-color: #B2DFDB;
+            /*background-image: url('../../images/loginbg.jpg');*/
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            background-size: cover;
+            @apply(--layout-vertical);
+        }
+
+        .loginDialog {
+            background-color: #FFF;
+            min-width:320px;
+            @apply(--layout-vertical);
+        }
+
+        .formHorizontal {
+            @apply(--layout-horizontal);
+        }
+
+        .formVertical {
+            @apply(--layout-vertical);
+        }
+
+        .loginTitleBar {
+            background-color: #00796B;
+            @apply(--layout-horizontal);
+            padding: 8px;
+            height: 48px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .loginContent {
+            padding-left:16px;
+            padding-right:16px;
+            @apply(--layout-vertical);
+        }
+
+        .signInButton{
+            color: #FFF;
+            background-color: #2962FF;
+        }
+
+
+
+    </style>
+    <template>
+
+        <ted-auth-service id="authService" on-auth-success="onAuthSuccess" on-auth-fail="onAuthFail"></ted-auth-service>
+
+
+        <div class="background">
+            <span class="flex"></span>
+
+            <div class="formHorizontal">
+                <span class="flex"></span>
+
+                <div class="formVertical">
+
+                <paper-material elevation="2" class="loginDialog">
+                    <div class="loginTitleBar">
+                        <span class="flex"></span>
+                        <div class="paper-font-headline" style="color:#FFF">Commander Admin</div>
+                        <span class="flex"></span>
+                    </div>
+
+                    <div class="loginContent">
+                        <div id="errorMessageField" class="paper-font-caption" style="display:none;color: #FF0000; width:100%; text-align:center">Error</div>
+                        <paper-input id="username" error-message="Required" label="Username" required="true"></paper-input>
+                        <paper-input id="password" error-message="Required" type="password" label="Password" required="true"></paper-input>
+
+                        <span style="height:16px"></span>
+                        <div class="formHorizontal">
+                            <span class="flex"></span>
+                            <paper-checkbox id="keepMeCheckBox">Keep me logged in</paper-checkbox>
+                            <span class="flex"></span>
+                        </div>
+                        <span style="height:16px"></span>
+
+                        <paper-button on-click="signIn" raised class="signInButton">Sign In</paper-button>
+
+                        <span style="height:24px"></span>
+                    </div>
+                </paper-material>
+
+                </div>
+
+                <span class="flex"></span>
+            </div>
+
+            <span class="flex"></span>
+        </div>
+     </template>
+</dom-module>
+<script>
+    (function() {
+        Polymer({
+            is: 'ted-login',
+            properties: {
+              _logger: Object
+            },
+            listeners:{
+
+            },
+            created: function(){
+
+              this._logger = LoggerFactory.getLogger(this);
+              this._logger.debug('Created');
+            },
+          onAuthFail: function(){
+            window.sessionStorage.clear();
+            this.$.errorMessageField.style.display = 'block';
+            this.$.errorMessageField.innerHTML = 'Invalid Username or Password';
+          },
+          onAuthSuccess: function(authResponse){
+
+            this._logger.info("authResponse: " + JSON.stringify(authResponse.detail));
+
+            this.$.errorMessageField.style.display = 'none';
+            if (this.$.keepMeCheckBox.checked){
+              this._logger.info('Keep Me Logged In Checked. Saving Credentials');
+              window.localStorage.clear();
+              window.localStorage.setItem('REFRESH_TOKEN', authResponse.detail.refresh_token);
+            }
+
+            var expires = (new Date()).getTime();
+            expires += (authResponse.detail.expires_in * 1000);
+            this._logger.info('Login successful. Redirecting to dashboard');
+
+            window.sessionStorage.clear();
+            window.sessionStorage.setItem('ACCESS_TOKEN', authResponse.detail.access_token);
+            window.sessionStorage.setItem('ACCESS_TOKEN_EXPIRES', expires);
+
+
+            this._logger.debug('--ACCESS_TOKEN:' + window.sessionStorage.getItem('ACCESS_TOKEN'));
+            this._logger.debug('--REFRESH_TOKEN:' + window.localStorage.getItem('REFRESH_TOKEN'));
+            this._logger.debug('--ACCESS_TOKEN_EXPIRES:' + window.sessionStorage.getItem('ACCESS_TOKEN_EXPIRES'));
+
+            page('/search');
+          },
+          onPageSelected: function(){
+              this._logger.info('Selected');
+            },
+
+            /* jshint undef: true, unused: false, camelcase: false */
+            signIn: function(event, detail, sender){
+
+              this.$.errorMessageField.style.display = 'none';
+
+              //TODO: Erase me
+              this.$.username.value = 'pete@petecode.com';
+              this.$.password.value = 'P-r3ss1!';
+              this.$.keepMeCheckBox.checked = true;
+              //TODO: End
+
+              //Do Validation of the required fields
+              var isValid = this.$.username.validate();
+              isValid = this.$.password.validate() && isValid;
+              if (isValid){
+
+                this.$.authService.passwordAuth(this.$.username.value, this.$.password.value);
+              }
+            },
+
+        });
+    })();
+</script>

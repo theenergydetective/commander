@@ -1,0 +1,38 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:style field="localStyle" src="../../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+
+        .captionField {
+            color: DEFAULT_TEXT;
+            font-size: 8pt;
+        }
+    </ui:style>
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+
+    <g:HTMLPanel>
+    <div class="{style.css.horizontal}" style="max-width:275px">
+    <g:CaptionPanel ui:field="captionField" stylePrimaryName="{localStyle.captionField}">
+        <g:HTMLPanel>
+            <div class="{style.css.vertical}">
+                <div class="{style.css.horizontal} {style.css.alignCenter}">
+                    <div style="width:100px"/>
+                    <div class="{style.css.captionText}" ui:field="stepHeader" style="font-size:8pt; width:75px; padding-right:16px"><ui:msg>Demand Exceeds kW</ui:msg></div>
+                    <div class="{style.css.captionText}" ui:field="costHeader" style="font-size:8pt; width:75px"><ui:msg>$/kW</ui:msg></div>
+                </div>
+                <g:VerticalPanel horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_TOP" ui:field="contentPanel"/>
+            </div>
+        </g:HTMLPanel>
+    </g:CaptionPanel>
+    </div>
+    </g:HTMLPanel>
+
+</ui:UiBinder>

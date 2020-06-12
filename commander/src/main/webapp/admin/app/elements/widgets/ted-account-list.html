@@ -1,0 +1,80 @@
+<!--
+@license
+Copyright (c) 2015 Jibehome. All Rights Reserved
+-->
+
+<dom-module id="ted-account-list">
+    <style>
+        :host {
+            display: block;
+        }
+
+        .item {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        @apply(--layout-around-justified);
+          padding: 20px;
+          background-color: white;
+          cursor: pointer; cursor: hand;
+          border: solid;
+          border-width: 0;
+          border-bottom-width:1px;
+          border-color: var(--divider-color);
+        }
+
+    </style>
+    <template>
+
+      <iron-ajax id="account_ajax"
+                 handle-as="json"
+                 content-type='application/json'
+                 loading="{{loading}}"
+                 method="get"
+                 last-response="{{accounts}}"
+        >
+      </iron-ajax>
+      <!-- The paper-drop down is in progress. This is a quick and dirty implementation since our needs are fairly simple-->
+
+
+
+
+      <content>
+        <div>
+        <template is="dom-repeat" items="[[accounts]]">
+          <div class="item" on-click="itemSelected">
+            <div class="paper-font-body1" style="overflow:hidden;width:250px;text-overflow: ellipsis;">[[item.account.name]]</div>
+            <div class="paper-font-body1" style="width:75px">[[item.accountRole]]</div>
+            <iron-icon icon="chevron-right"/>
+          </div>
+        </template>
+        </div>
+      </content>
+     </template>
+</dom-module>
+<script>
+    (function() {
+        Polymer({
+            is: 'ted-account-list',
+            properties: {
+              _logger:Object,
+              user: Object,
+            },
+            observers: [
+              'userValueHandler(user)'
+            ],
+            created: function(){
+              this._logger = LoggerFactory.getLogger(this);
+              this._logger.debug('Created');
+            },
+          itemSelected:function(r){
+            this._logger.debug('Selected ' + JSON.stringify(r.model.item));
+            page('/userAdmin/' + this.user.id + '/accounts/' + r.model.item.account.id);
+          },
+          userValueHandler: function(user){
+              this.$.account_ajax.url = '/api/admin/user/' + user.id + '/accounts';
+              this.$.account_ajax.headers = {'Authorization': 'Bearer ' + window.sessionStorage.getItem('ACCESS_TOKEN')};
+              this.$.account_ajax.generateRequest();
+            }
+        });
+    })();
+</script>

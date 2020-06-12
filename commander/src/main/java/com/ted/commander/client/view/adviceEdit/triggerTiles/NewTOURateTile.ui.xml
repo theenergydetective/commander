@@ -1,0 +1,73 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:m='urn:import:com.ted.commander.client.view.adviceEdit.triggerTiles'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+
+    <ui:style field="localStyle" gss="true">
+        .caption {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            line-height: 14px;
+            font-color: #272727;
+            text-align: left;
+            width:100%;
+            margin-top:16px;
+        }
+
+
+    </ui:style>
+
+
+    <g:HTMLPanel addStyleNames="{style.css.clickable}">
+        <style is="custom-style">
+            .numericInput {
+                --paper-input-container-label {
+                    color: #727272;
+                }
+            }
+        </style>
+
+        <div class="vertical center layout" ui:field="notTOUDiv">
+            <div class="paper-font-body1" style="color:red;margin:16px;"><ui:msg>Your plan Type Not Applicable</ui:msg></div>
+        </div>
+
+        <div class="vertical center layout" ui:field="touDiv">
+            <paper-input error-message="required" style="width:100%" label="Minutes Before Rate Change" step=".001" type="number" min="1" max="120" ui:field="minutePicker" required="true"></paper-input>
+
+            <div class="horizontal center justified layout" style="margin-top:16px; width:150px" ui:field="offPeakDiv">
+                <div class="paper-font-body1" style="margin-right:16px; text-align:left" ui:field="offPeakName">Off-Peak</div>
+                <paper-toggle-button class="paperToggleButton" ui:field="offPeakToggle"></paper-toggle-button>
+            </div>
+            <div class="horizontal center justified layout" style="margin-top:16px; width:150px" ui:field="peakDiv">
+                <div class="paper-font-body1" style="margin-right:16px; text-align:left" ui:field="peakName">Peak</div>
+                <paper-toggle-button ui:field="peakToggle" class="paperToggleButton"></paper-toggle-button>
+            </div>
+            <div class="horizontal center justified layout" style="margin-top:16px; width:150px" ui:field="midPeakDiv">
+                <div class="paper-font-body1" style="margin-right:16px; text-align:left" ui:field="midPeakName">Mid-Peak</div>
+                <paper-toggle-button ui:field="midPeakToggle" class="paperToggleButton"></paper-toggle-button>
+            </div>
+            <div class="horizontal center justified layout" style="margin-top:16px; width:150px" ui:field="superPeakDiv">
+                <div class="paper-font-body1" style="margin-right:16px; text-align:left" ui:field="superPeakName">Super-Peak</div>
+                <paper-toggle-button ui:field="superPeakToggle" class="paperToggleButton"></paper-toggle-button>
+            </div>
+        </div>
+
+        <div style="margin-top:16px">
+            <m:AlarmRangeWidget ui:field="alarmRateWidget"></m:AlarmRangeWidget>
+        </div>
+
+
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

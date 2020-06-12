@@ -1,0 +1,245 @@
+@def PRIMARY eval("com.petecode.common.client.widget.paper.PaperStyleManager.getPrimary()");
+@def PRIMARY_LIGHT eval("com.petecode.common.client.widget.paper.PaperStyleManager.getPrimaryLight()");
+@def PRIMARY_DARK eval("com.petecode.common.client.widget.paper.PaperStyleManager.getPrimaryDark()");
+@def ACCENT eval("com.petecode.common.client.widget.paper.PaperStyleManager.getAccent()");
+@def DEFAULT_TEXT eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDefaultText()");
+@def SECONDARY_TEXT eval("com.petecode.common.client.widget.paper.PaperStyleManager.getSecondaryText()");
+@def BACKGROUND_COLOR eval("com.petecode.common.client.widget.paper.PaperStyleManager.getBackground()");
+@def DIVIDER_COLOR eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDivider()");
+@def ERROR_COLOR eval("com.petecode.common.client.widget.paper.PaperStyleManager.getError()");
+@def SUB_TITLEBAR_COLOR #DDDDDD;
+
+@def NM4DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(-4)");
+@def NM8DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(-8)");
+@def NM12DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(-12)");
+@def NM16DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(-16)");
+@def M4DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(4)");
+@def M8DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(8)");
+@def M16DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(16)");
+@def M20DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(20)");
+@def M24DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(24)");
+@def M32DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(32)");
+@def M36DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(36)");
+@def M40DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(40)");
+@def M44DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(44)");
+@def M48DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(48)");
+@def M53DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(53)");
+@def M56DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(56)");
+@def M64DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(64)");
+@def M68DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(68)");
+@def M72DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(72)");
+@def M150DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(150)");
+@def M140DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(140)");
+
+@def M250DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(250)");
+@def M360DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(360)");
+@def M365DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(365)");
+@def M560DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(560)");
+@def M1200DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(1200)");
+
+
+.bigIcon{
+    height:48px;
+    width:48px;
+}
+
+.noShrink{
+    flex-shrink:0;
+}
+
+.bigIcon #icon{
+    height:48px;
+    width:48px;
+}
+
+
+
+.titleBar{
+    background-color: PRIMARY;
+    z-index: 4;
+    height: 64px;
+    vertical-align:middle;
+    width:100%;
+}
+
+
+.subTitleBar{
+    background-color: SUB_TITLEBAR_COLOR;
+    width: 100%;
+    height:32px;
+}
+
+
+.smallActionButton[raised] {
+  font-family: 'Roboto', serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #FFF;
+  font-size: 10pt;
+  padding:0;
+
+}
+
+.searchDialog{
+    background-color: PRIMARY;
+    width:100%;
+    height:60px;
+}
+
+.overflow{
+    overflow: scroll;
+    overflow-x:hidden;
+
+}
+
+.iconStyle{
+    color: DEFAULT_TEXT;
+    opacity: .87;
+}
+
+.titlePad {
+            margin-top: 96px;
+            overflow: scroll;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+            height: calc(100% - 96px);
+
+}
+
+
+
+.mobileBackground{
+
+}
+
+@media (max-width: 360px) {
+
+    .titlePad {
+        margin-top: 88px;
+    }
+
+    .mobileBackground{
+        background-color: #FFF;
+    }
+}
+
+
+.fixed {
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+.roundImage24{
+    border-radius:50%;
+    height:24px;
+    width:24px;
+
+}
+
+.roundImage32{
+    border-radius:50%;
+    height:32px;
+    width:32px;
+}
+
+.roundImage48{
+    border-radius:50%;
+    height:48px;
+    width:48px;
+}
+
+.roundImage64{
+    border-radius:50%;
+    height:64px;
+    width:64px;
+}
+
+.content{
+    width:100%;
+    max-width: M1200DP;
+}
+
+
+.progressBarDaysLeftText{
+    fill: #FFF;
+
+    font-family: 'Roboto', serif;
+    font: 16px sans-serif;
+
+}
+ .progressBarPercentText{
+     fill: #FFF;
+     font-family: 'Roboto', serif;
+     font: 12px sans-serif;
+ }
+
+
+@media (max-width: 360px) {
+
+     .content{
+        width: 360px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .content{
+        padding-left: 16px;
+        padding-right:16px;
+    }
+}
+
+
+
+
+.smallActionButton[raised][disabled]{
+    background: #eaeaea;
+    color: #a8a8a8;
+    cursor: auto;
+    pointer-events: none;
+    padding:0;
+}
+.smallActionButton[raised] .button-content {
+
+}
+
+
+
+.searchTextBox{
+    background-color: transparent;
+    font-family: 'Roboto', serif;
+    color: #FFF;
+    font-size: 1em;
+    border-style:solid;
+    border-width:0;
+    border-bottom-width:1px;
+    border-color: #FFF;
+    margin: 0.5em 0 0.25em;
+    padding-bottom: 4px;
+    width:100%;
+}
+
+.searchTextBox:focus{
+            color: ACCENT;
+            border-color: ACCENT;
+}
+
+.conversationIcon{
+    height: 36px;
+    width: 36px;
+    padding:0;
+    margin:0;
+    float:left;
+}
+
+.conversationIcon #icon{
+    COLOR: SECONDARY_TEXT;
+    height: 36px;
+    width: 36px;
+    padding:0;
+    margin:0;
+}

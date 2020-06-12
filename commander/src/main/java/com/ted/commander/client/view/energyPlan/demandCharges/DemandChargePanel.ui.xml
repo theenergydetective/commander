@@ -1,0 +1,132 @@
+<!--
+  ~ Copyright (c) 2014. The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+
+    <ui:style field="localStyle" src="../../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+        .checkBox {
+            padding-right: 16px;
+            padding-left: 16px;
+        }
+
+    </ui:style>
+
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+    <g:HTMLPanel>
+        <div class="{style.css.vertical}">
+
+
+            <div class="{style.css.horizontal} {style.css.alignCenter}" style="padding-top:16px">
+                <div class="{style.css.body1Text}" style="padding-right:16px">
+                    <ui:msg>Does your utility apply demand charges?</ui:msg>
+                </div>
+                <paper-checkbox ui:field="useDemandChargeCB" />
+            </div>
+
+            <div class="{style.css.vertical} {style.css.fullWidth}" ui:field="demandChargePanel"
+                 style="padding-top:16px">
+
+                <div class="{style.css.body1Text}" style="margin-bottom:8px">
+                    <ui:msg>What type of demand charge does your utility use?</ui:msg>
+                </div>
+
+
+                <paper-radio-group ui:field="demandTypeGroup"
+                                   class="horiztonal center wrap justified layout">
+                    <paper-radio-button name="TIERED">
+                        <ui:msg>Demand Steps (Tiered)</ui:msg>
+                    </paper-radio-button>
+                    <paper-radio-button name="TIERED_PEAK">
+                        <ui:msg>Demand Steps (Peak)</ui:msg>
+                    </paper-radio-button>
+                    <paper-radio-button name="TOU">
+                        <ui:msg>Demand TOU</ui:msg>
+                    </paper-radio-button>
+                </paper-radio-group>
+
+
+                <div class="{style.css.body1Text}" style="padding-top:16px; padding-bottom:8px;">
+                    <ui:msg>Are demand charges based on kW or kVA ?</ui:msg>
+                </div>
+
+
+                <paper-radio-group ui:field="demandPowerTypeGroup" class="horizontal center layout">
+                    <paper-radio-button name="TRUE">
+                        <ui:msg>kW</ui:msg>
+                    </paper-radio-button>
+                    <paper-radio-button name="FALSE">
+                        <ui:msg>kVA</ui:msg>
+                    </paper-radio-button>
+                </paper-radio-group>
+
+
+                <div class="{style.css.body1Text}" style="padding-top:16px; padding-bottom:8px;">
+                    <ui:msg>Are demand charges applicable on the following days?</ui:msg>
+                </div>
+
+                <div class="horizontal center justified wrap layout">
+
+                    <paper-checkbox ui:field="saturdayCB" addStyleNames="{localStyle.checkBox}">
+                        <ui:msg>Saturday?</ui:msg>
+                    </paper-checkbox>
+
+                    <paper-checkbox ui:field="sundayCB" addStyleNames="{localStyle.checkBox}">
+                        <ui:msg>Sunday?</ui:msg>
+                    </paper-checkbox>
+
+                    <paper-checkbox ui:field="holidayCB" addStyleNames="{localStyle.checkBox}">
+                        <ui:msg>Holidays?</ui:msg>
+                    </paper-checkbox>
+
+
+                    <paper-checkbox ui:field="offPeakCB" addStyleNames="{localStyle.checkBox}">
+                        <ui:msg>Off Peak?</ui:msg>
+                    </paper-checkbox>
+                </div>
+
+
+                <div class="{style.css.horizontal} {style.css.alignCenter}" style="padding-top:16px">
+                    <div class="{style.css.body1Text}" style="padding-right:16px;">
+                        <ui:msg>
+                            How long is your utility's demand charge averaging time?
+                        </ui:msg>
+                    </div>
+                    <w:DemandAverageTimePicker ui:field="avgListBox"></w:DemandAverageTimePicker>
+                </div>
+
+
+                <div class="{style.css.horizontal} {style.css.alignCenter}" ui:field="stepQuestionField"
+                     style="padding-top:16px">
+                    <div class="{style.css.body1Text}" style="padding-right:16px">
+                        <ui:msg>
+                            How many steps of demand charges ?
+                        </ui:msg>
+                    </div>
+                    <w:NumberPicker ui:field="stepListBox" maxNumber="5" minNumber="1"
+                                    leadZero="false"></w:NumberPicker>
+                </div>
+
+                <div style="height:16px"/>
+                <g:FlowPanel ui:field="contentPanel"/>
+
+
+            </div>
+        </div>
+
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

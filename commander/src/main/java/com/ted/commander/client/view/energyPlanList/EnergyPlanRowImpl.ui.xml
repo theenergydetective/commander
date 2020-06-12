@@ -1,0 +1,50 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:iw='urn:import:com.vaadin.polymer.iron.widget'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+
+    <ui:style field="localStyle" src="../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+        .namePadding {
+            width: 100%;
+            padding-bottom: 16px;
+            padding-right: 32px;
+        }
+
+
+        @media (max-width: 332px) {
+            .namePadding {
+                padding-right: 0;
+            }
+        }
+
+
+    </ui:style>
+
+
+    <g:FocusPanel ui:field="mainPanel" addStyleNames="{style.css.tile} {style.css.clickable} {style.css.fullWidth}">
+        <g:HTMLPanel>
+            <div class="{style.css.horizontal} {style.css.fullWidth} {style.css.alignCenter}"
+                 style="justify-content:space-between;align-content:space-between;">
+                <div class="{localStyle.namePadding}">
+                    <div class="{style.css.vertical}">
+                        <div class="{style.css.body1Text}" style="padding-bottom: 12px;" ui:field="titleField"/>
+                        <div class="{style.css.captionText}" ui:field="descriptionField"/>
+                    </div>
+                </div>
+                <div class="{style.css.flex1}"/>
+                <iw:IronIcon icon="icons:chevron-right" ui:field="rightChevronButton" visible="true"/>
+
+            </div>
+        </g:HTMLPanel>
+    </g:FocusPanel>
+
+
+</ui:UiBinder>

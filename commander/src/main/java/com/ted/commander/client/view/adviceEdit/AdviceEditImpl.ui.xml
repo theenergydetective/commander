@@ -1,0 +1,139 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:style field="localStyle" src="../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+        .whiteIcon #icon {
+            color: #FFF;
+            opacity: 1;
+        }
+
+        .max {
+            height: 100%;
+            width: 100%;
+        }
+        .titleIcon #icon{
+            color:#FFF;
+        }
+
+        .divider {
+            margin-top: 16px;
+            margin-bottom: 16px;
+            width: 100%;
+            height: 1px;
+            border: 0px solid DIVIDER_COLOR;
+            border-bottom-width: 1px;
+        }
+
+        .verticalList {
+            width:calc(98% - 32px);
+            margin-left:16px;
+            margin-right:16px;
+        }
+
+
+
+    </ui:style>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+
+    <g:HTMLPanel addStyleNames="{localStyle.max}">
+
+        <style is="custom-style">
+            paper-material {
+                background-color: #FFF;
+                width:calc(98% - 32px);
+                max-width: 600px;
+                min-width: 300px;
+                margin: auto;
+                margin-top: 24px;
+                padding:24px;
+            }
+
+
+
+
+        </style>
+
+
+
+
+
+        <paper-header-panel>
+            <paper-toolbar justify="justified">
+                <div class="horizontal start center layout">
+                    <pw:PaperIconButton icon="icons:chevron-left" ui:field="backButton" addStyleNames="{localStyle.titleIcon}" />
+                    <div class="title" style="color:#FFF"><ui:msg>Edit Advice</ui:msg></div>
+                </div>
+
+                <pw:PaperIconButton icon="icons:delete" ui:field="deleteButton" addStyleNames="{localStyle.titleIcon}" />
+            </paper-toolbar>
+
+            <paper-material>
+
+
+                <w:LocationPicker ui:field="locationPicker" popupWidth="600px">
+                    <ui:msg>Location</ui:msg>
+                </w:LocationPicker>
+                <pw:PaperInput ui:field="adviceNameField" label="{stringRes.adviceName}"/>
+
+
+
+                <div class="horizontal justified center layout" style="margin-top:32px">
+                    <div></div>
+                    <div class="paper-font-subhead"><ui:msg>Recipients</ui:msg></div>
+                    <div ui:field="recipientDiv">
+                    <paper-icon-button ui:field="addRecipientIcon" icon="icons:add"></paper-icon-button>
+                    </div>
+                </div>
+
+
+                <div ui:field="noRecipientsField" class="paper-font-body2" style="width:100%; text-align:center; color:#272727">
+                    <ui:msg>You have not specified any recipients for this advice. Please click the '+' icon to add a recipient.</ui:msg>
+                </div>
+
+
+                    <g:VerticalPanel ui:field="recipientPanel" addStyleNames="{localStyle.verticalList}">
+
+
+                </g:VerticalPanel>
+
+
+                <div class="{localStyle.divider}"></div>
+
+                <div class="horizontal justified center layout" style="margin-top:32px">
+                    <div></div>
+                    <div class="paper-font-subhead"><ui:msg>Triggers</ui:msg></div>
+                    <div ui:field="triggerDiv">
+                        <paper-icon-button ui:field="addTriggerIcon" icon="icons:add"></paper-icon-button>
+                    </div>
+                </div>
+
+                <div ui:field="noTriggersField" class="paper-font-body2" style="width:100%; text-align:center; color:#272727">
+                    <ui:msg>There are no alarm triggers specified. Click the '+' icon to add a new alarm trigger.</ui:msg>
+                </div>
+
+                <g:VerticalPanel ui:field="triggerPanel" addStyleNames="{localStyle.verticalList}"></g:VerticalPanel>
+            </paper-material>
+
+
+            <paper-toast ui:field="toast">
+                <ui:msg>Saved</ui:msg>
+            </paper-toast>
+
+
+        </paper-header-panel>
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

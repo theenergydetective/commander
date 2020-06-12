@@ -1,0 +1,152 @@
+<!--
+@license
+Copyright (c) 2015 The Energy Detective. All Rights Reserved
+-->
+
+<dom-module id="ted-user-admin">
+  <style>
+    :host {
+      display: block;
+    @apply(--layout-vertical);
+    }
+    .horizontal{
+    @apply(--layout-horizontal);
+    @apply(--layout-center);
+
+    }
+    .vertical {
+    @apply(--layout-vertical);
+    @apply(--layout-center);
+    }
+
+    .background {
+      width:100%;
+      height:100%;
+      position:absolute;
+      top:0;
+      left:0;
+      @apply(--layout-vertical);
+      background-color: var(--primary-light-background-color);
+    }
+
+    .cardContent{
+      width:100%;
+      @apply(--layout-vertical);
+      min-width:320px;
+      max-width:600px;
+      background: #FFF;
+      margin-bottom:24px;
+      padding-top:16px;
+      padding-bottom:16px;
+    }
+
+
+
+
+  </style>
+  <template>
+
+
+    <iron-ajax id="get_user_ajax"
+               handle-as="json"
+               loading="{{loading}}"
+               last-response="{{user}}"
+               on-error="onError"
+
+      >
+    </iron-ajax>
+
+    <content>
+      <div class="background">
+        <paper-header-panel main mode="standard">
+
+          <!-- Main Toolbar -->
+          <paper-toolbar id="mainToolbar">
+            <paper-icon-button icon="arrow-back"  on-click="onBackClick"></paper-icon-button>
+            <div class="paper-font-headline" >[[user.username]]</div>
+            <span class="flex"></span>
+            <paper-spinner active="{{loading}}"></paper-spinner>
+          </paper-toolbar>
+
+          <!-- Main Content -->
+          <div class="horizontal">
+            <div style="flex:1"/>
+            <div class="vertical">
+              <paper-tabs id="tab" selected="{{selectedTab}}" style="width:100%; max-width:800px;">
+                <paper-tab class="tab">User</paper-tab>
+                <paper-tab class="tab">Accounts</paper-tab>
+              </paper-tabs>
+
+              <paper-material elevation="2" class="cardContent" style="margin-top:16px; padding:16px">
+
+
+                <iron-pages selected="{{selectedTab}}" >
+                  <div>
+                    <div class="paper-font-caption" style="padding-top:16px">User Status</div>
+                    <div class="horizontal">
+                      <div class="flex"></div>
+                      <ted-user-status user="{{user}}"></ted-user-status>
+                      <div class="flex"></div>
+                    </div>
+                    <div style="height:32px"></div>
+
+                    <div class="paper-font-caption" style="padding-top:16px">Password</div>
+                    <ted-user-password user="{{user}}"></ted-user-password>
+
+                  </div>
+                  <div><ted-account-list user="{{user}}"></ted-account-list></div>
+                </iron-pages>
+
+              </paper-material>
+            </div>
+            <div style="flex:1"/>
+          </div>
+        </paper-header-panel>
+      </div>
+    </content>
+  </template>
+</dom-module>
+<script>
+  (function() {
+    Polymer({
+      is: 'ted-user-admin',
+      properties: {
+        _logger: Object,
+        userId:Number
+      },
+      listeners:{
+
+      },
+      created: function(){
+        this._logger = LoggerFactory.getLogger(this);
+        this._logger.debug('Created');
+
+      },
+
+      onPageSelected: function(){
+        this._logger.debug('onPageSelected');
+
+        //Load the user
+        this.userId = parseInt(app.params.userId);
+        this.$.get_user_ajax.url = '/api/admin/user/' + this.userId;
+        this._logger.info('Looking up user ' + this.$.get_user_ajax.url);
+        this.$.get_user_ajax.headers = {'Authorization': 'Bearer ' + window.sessionStorage.getItem('ACCESS_TOKEN')};
+        this.$.get_user_ajax.generateRequest();
+
+        if (typeof  this.selectedTab === 'undefined') this.selectedTab = 0;
+
+
+      },
+      onTabPageSelected: function(response){
+
+      },
+      onError: function(){
+        this._logger.error('ERROR Retreiving User');
+        page('/login');
+      },
+      onBackClick: function(){
+        page('/search');
+      },
+    });
+  })();
+</script>

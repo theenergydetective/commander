@@ -1,0 +1,57 @@
+<!--
+@license
+Copyright (c) 2015 Jibehome. All Rights Reserved
+
+ Service for handling authentication.
+-->
+
+<dom-module id="ted-auth-service">
+  <template>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'ted-auth-service',
+      properties: {
+        _logger: Object,
+        passwordHash: String,
+      },
+
+      created: function(){
+        this._logger = LoggerFactory.getLogger(this);
+        this._logger.debug('Created');
+      },
+
+      //@event auth-success
+      //event auth-failed
+      passwordAuth:function(username, password) {
+        var local = this;
+        this._logger.debug('passwordAuth Called');
+        var formContent = 'grant_type=password&client_id=web&scope=api&username='.concat(username).concat('&password=').concat(password);
+        local._logger.debug('Posting:' + formContent);
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('POST', '/oauth/token', true);
+        xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xmlhttp.setRequestHeader('Authorization', 'Basic d2ViOmNvbW1hbmRlckFQSQ==');
+        xmlhttp.send(formContent);
+        xmlhttp.onload = function () {
+          if (xmlhttp.readyState === 4) {
+            local._logger.debug('Response Received: ' + xmlhttp.status);
+
+            if (xmlhttp.status === 200) {
+              local._logger.debug('Response: ' + xmlhttp.responseText);
+              var response = JSON.parse(xmlhttp.responseText);
+              local.fire('auth-success', response);
+            } else {
+              local._logger.warn("AUTH FAILED");
+              local.fire('auth-fail');
+            }
+          }
+        }
+      },
+
+    });
+  })();
+</script>

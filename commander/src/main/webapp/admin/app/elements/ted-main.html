@@ -1,0 +1,51 @@
+<!--
+@license
+Copyright (c) 2015 The Energy Detective. All Rights Reserved
+-->
+
+<dom-module id="ted-main">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <iron-pages id="pages" attr-for-selected="data-route" selected="{{route}}" >
+      <ted-login data-route="login"></ted-login>
+      <ted-user-search data-route="userSearch"></ted-user-search>
+      <ted-user-admin data-route="userAdmin"></ted-user-admin>
+      <ted-account-admin data-route="accountAdmin"></ted-account-admin>
+    </iron-pages>
+  </template>
+</dom-module>
+<script>
+  (function() {
+    Polymer({
+      is: 'ted-main',
+      properties: {
+        _logger: Object,
+        route: {
+          type: String,
+         // notify: true
+
+        }
+
+      },
+      observers: [
+        'selectedPage(route)'
+      ],
+      created: function(){
+        this._logger = LoggerFactory.getLogger(this);
+        this._logger.debug('Created');
+      },
+      ready: function() {
+        this._logger.debug('Ready');
+      },
+      selectedPage: function(route){
+        this._logger.info('Page Selected: ' + route);
+        this.$.pages.selectedItem.onPageSelected();
+      }
+
+    });
+  })();
+</script>

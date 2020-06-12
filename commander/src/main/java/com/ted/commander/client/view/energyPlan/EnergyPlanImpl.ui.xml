@@ -1,0 +1,351 @@
+<!--
+  ~ Copyright (c) 2015. Jibehome. All Rights Reserved.
+  -->
+
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:p='urn:import:com.petecode.common.client.widget.paper'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="fieldRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+
+    <ui:style field="localStyle" src="../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+
+        .titlePad {
+            overflow: scroll;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 100%;
+            height: calc(100% - 64px);
+        }
+
+        .seasonPad {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .radioGroupPad {
+            justify-content: space-around;
+            align-content: space-around;
+        }
+
+        .checkBox {
+            padding-right: 16px;
+            padding-left: 16px;
+        }
+
+        .deleteButton[raised] {
+            background-color: red;
+        }
+
+    </ui:style>
+
+
+    <!-- Transaction cards -->
+    <g:HTMLPanel addStyleNames="{style.css.fullPage}">
+        <style is="custom-style">
+            paper-material {
+            background-color: #FFF;
+            width:100%;
+            max-width: 800px;
+            min-width: 300px;
+
+            padding:0;
+            padding-left:16px;
+            padding-right:16px;
+            margin: auto;
+            margin-top: 24px;
+            }
+        </style>
+
+        <pw:PaperHeaderPanel mode="standard" shadow="true">
+            <paper-toolbar class="paperToolbar">
+                <pw:PaperIconButton icon="icons:chevron-left" ui:field="backButton"
+                                    addStyleNames="{style.css.whiteIcon}"/>
+                <div class="title" style="color:#FFF">
+                    <ui:msg>Edit Energy Plan</ui:msg>
+                </div>
+                <div class="flex"></div>
+                <pw:PaperIconButton icon="delete" ui:field="deleteButton" addStyleNames="{style.css.whiteIcon}"/>
+            </paper-toolbar>
+
+            <!-- Active card Section -->
+            <paper-material class="vertical layout">
+
+                <p:PaperInputDecorator ui:field="planNameField" label="{fieldRes.energyPlanName}*"
+                                       addStyleNames="{style.css.fullWidth}"
+                >
+
+                </p:PaperInputDecorator>
+
+                <div style="height:16px"/>
+
+                <w:CurrencyPicker ui:field="currencyPicker" addStyleNames="{style.css.fullWidth}">
+                    <ui:msg>Currency Type</ui:msg>
+                </w:CurrencyPicker>
+
+                <div style="height:16px"/>
+
+                <p:PaperInputDecorator ui:field="utilityNameField" label="{fieldRes.utility}*"
+                                       addStyleNames="{style.css.fullWidth}"
+                >
+
+                </p:PaperInputDecorator>
+
+                <div style="height:16px"/>
+
+                <div class="{style.css.horizontal} {style.css.fullWidth}">
+                    <div class="{style.css.captionText}">
+                        <ui:msg>Meter Read Date</ui:msg>
+                    </div>
+                    <div class="{style.css.flex1}"/>
+                </div>
+                <pw:PaperSlider ui:field="daySlider" max="31" min="1" step="1" pin="true" editable="true"/>
+
+
+                <div style="height:16px"/>
+
+                <div class="{style.css.horizontal} {style.css.fullWidth}">
+                    <div class="{style.css.captionText}">
+                        <ui:msg>Billing Cycle</ui:msg>
+                    </div>
+                    <div class="{style.css.flex1}"/>
+                </div>
+
+                <div class="{style.css.horizontal} {style.css.fullWidth}">
+                    <div style="flex:1"/>
+                    <paper-radio-group ui:field="billingCycleGroup"
+                                       class="{style.css.horizontalWrap} {localStyle.radioGroupPad}">
+                        <paper-radio-button name="MONTHLY">
+                            <ui:msg>Monthly</ui:msg>
+                        </paper-radio-button>
+                        <paper-radio-button name="BI_MONTHLY_ODD">
+                            <ui:msg>Bi-Monthly (Odd)</ui:msg>
+                        </paper-radio-button>
+                        <paper-radio-button name="BI_MONTHLY_EVEN">
+                            <ui:msg>Bi-Monthly (Even)</ui:msg>
+                        </paper-radio-button>
+                    </paper-radio-group>
+                    <div style="flex:1"/>
+                </div>
+
+                <div style="height:16px"/>
+
+                <div class="{style.css.tile}"/>
+
+
+                <div class="{style.css.horizontalWrap} {style.css.fullWidth}">
+                    <div class="{style.css.body1Text}">
+                        <ui:msg>How many energy rate seasons does your utility use?</ui:msg>
+                    </div>
+                    <div class="{style.css.flex1}"/>
+                </div>
+
+                <div class="{style.css.horizontal} {style.css.fullWidth}">
+                    <div style="flex:1"/>
+                    <paper-radio-group ui:field="seasonNumberGroup"
+                                       class="{style.css.horizontalWrap} {localStyle.radioGroupPad} {style.css.fullWidth}">
+                        <paper-radio-button name="1">
+                            <ui:msg>1</ui:msg>
+                        </paper-radio-button>
+                        <paper-radio-button name="2">
+                            <ui:msg>2</ui:msg>
+                        </paper-radio-button>
+                        <paper-radio-button name="3">
+                            <ui:msg>3</ui:msg>
+                        </paper-radio-button>
+                        <paper-radio-button name="4">
+                            <ui:msg>4</ui:msg>
+                        </paper-radio-button>
+                    </paper-radio-group>
+                    <div style="flex:1"/>
+                </div>
+
+                <div class="{style.css.horizontal} {style.css.fullWidth}">
+                    <div style="flex:1"/>
+                    <g:FlowPanel ui:field="seasonFlowPanel"/>
+                    <div style="flex:1"/>
+                </div>
+                <div style="height:16px"/>
+                <div class="{style.css.tile}"/>
+
+
+                <div class="{style.css.horizontalWrap} {style.css.fullWidth}">
+                    <div class="{style.css.body1Text}">
+                        <ui:msg>Please select your plan type</ui:msg>
+                    </div>
+                    <div class="{style.css.flex1}"/>
+                </div>
+
+                <div class="{style.css.horizontal} {style.css.fullWidth}">
+                    <div style="flex:1"/>
+                    <paper-radio-group ui:field="planTypeGroup"
+                                       class="{style.css.horizontalWrap} {localStyle.radioGroupPad} {style.css.fullWidth}">
+                        <paper-radio-button name="FLAT">
+                            <ui:msg>Flat</ui:msg>
+                        </paper-radio-button>
+                        <paper-radio-button name="TIER">
+                            <ui:msg>Tiered</ui:msg>
+                        </paper-radio-button>
+                        <paper-radio-button name="TOU">
+                            <ui:msg>Time of Use</ui:msg>
+                        </paper-radio-button>
+                        <paper-radio-button name="TIERTOU">
+                            <ui:msg>Tiered and TOU</ui:msg>
+                        </paper-radio-button>
+                    </paper-radio-group>
+                    <div style="flex:1"/>
+                </div>
+
+
+                <div class="{style.css.vertical} {style.css.fullWidth}" ui:field="tierDiv">
+                    <div class="{style.css.tile}"/>
+
+                    <div class="{style.css.horizontal} {style.css.fullWidth}">
+                        <div class="{style.css.captionText}">
+                            <ui:msg>Number of Tiers</ui:msg>
+                        </div>
+                        <div class="{style.css.flex1}"/>
+                    </div>
+                    <pw:PaperSlider ui:field="tierSlider" max="5" min="2" step="1" pin="true" editable="true"/>
+
+                    <div class="{style.css.horizontalWrap} {style.css.fullWidth} {localStyle.seasonPad}">
+                        <g:FlowPanel ui:field="tierFlowPanel" addStyleNames="{style.css.fullWidth}"/>
+                    </div>
+
+                </div>
+
+                <div class="{style.css.vertical} {style.css.fullWidth}" ui:field="touDiv">
+                    <div class="{style.css.tile}"/>
+                    <div class="{style.css.horizontal} {style.css.fullWidth}">
+                        <div class="{style.css.captionText}">
+                            <ui:msg>Number of TOU</ui:msg>
+                        </div>
+                        <div class="{style.css.flex1}"/>
+                    </div>
+                    <pw:PaperSlider ui:field="touSlider" max="4" min="2" step="1" pin="true" editable="true"/>
+
+
+                    <div class="horizontal center justified wrap layout">
+                        <div class="{style.css.captionText}">
+                            <ui:msg>TOU Rate Applicable?</ui:msg>
+                        </div>
+
+                        <paper-checkbox ui:field="saturdayCB" addStyleNames="{localStyle.checkBox}">
+                            <ui:msg>Saturday?</ui:msg>
+                        </paper-checkbox>
+
+                        <paper-checkbox ui:field="sundayCB" addStyleNames="{localStyle.checkBox}">
+                            <ui:msg>Sunday?</ui:msg>
+                        </paper-checkbox>
+
+                        <paper-checkbox ui:field="holidayCB" addStyleNames="{localStyle.checkBox}">
+                            <ui:msg>Holidays?</ui:msg>
+                        </paper-checkbox>
+                    </div>
+
+                    <div style="height:16px"/>
+
+                    <div class="{style.css.horizontal}">
+                        <div class="{style.css.captionText}">
+                            <ui:msg>Holiday Schedule?</ui:msg>
+                        </div>
+
+                        <paper-radio-group ui:field="holidyScheduleGroup"
+                                           class="{style.css.horizontalWrap} {localStyle.radioGroupPad} {style.css.fullWidth}">
+                            <paper-radio-button name="US">
+                                <ui:msg>US</ui:msg>
+                            </paper-radio-button>
+                            <paper-radio-button name="CANADA">
+                                <ui:msg>Canada</ui:msg>
+                            </paper-radio-button>
+                        </paper-radio-group>
+                    </div>
+
+
+                    <div class="{style.css.horizontalWrap} {style.css.fullWidth} {localStyle.seasonPad}">
+                        <g:FlowPanel ui:field="touFlowPanel"/>
+                    </div>
+                </div>
+
+
+                <div style="height:16px"/>
+
+                <div class="{style.css.vertical} {style.css.fullWidth}" ui:field="energyRatesDiv">
+                    <div class="{style.css.tile}"/>
+
+                    <div class="{style.css.horizontal} {style.css.fullWidth}">
+                        <div class="{style.css.captionText}">
+                            <ui:msg>Energy Rates</ui:msg>
+                        </div>
+                        <div class="{style.css.flex1}"/>
+                    </div>
+
+
+                    <div class="{style.css.horizontalWrap} {style.css.fullWidth} {localStyle.seasonPad}">
+                        <g:FlowPanel ui:field="energyRatesPanel" addStyleNames="{style.css.fullWidth}"/>
+                    </div>
+
+                </div>
+
+
+                <div style="height:16px"/>
+
+                <div class="{style.css.vertical} {style.css.fullWidth}" ui:field="demandChargeDiv">
+                    <div class="{style.css.tile}"/>
+
+                    <div class="{style.css.horizontal} {style.css.fullWidth}">
+                        <div class="{style.css.captionText}">
+                            <ui:msg>Demand Charges</ui:msg>
+                        </div>
+                        <div class="{style.css.flex1}"/>
+                    </div>
+
+
+                    <div class="{style.css.horizontalWrap} {style.css.fullWidth} {localStyle.seasonPad}">
+                        <g:FlowPanel ui:field="demandChargePanel" addStyleNames="{style.css.fullWidth}"/>
+                    </div>
+
+                </div>
+
+
+                <div style="height:16px"/>
+
+                <div class="{style.css.vertical} {style.css.fullWidth}" ui:field="additionalChargeDiv">
+                    <div class="{style.css.tile}"/>
+
+                    <div class="{style.css.horizontal} {style.css.fullWidth}">
+                        <div class="{style.css.captionText}">
+                            <ui:msg>Additional Charges</ui:msg>
+                        </div>
+                        <div class="{style.css.flex1}"/>
+                    </div>
+
+
+                    <div class="{style.css.horizontalWrap} {style.css.fullWidth} {localStyle.seasonPad}">
+                        <g:FlowPanel ui:field="additionalChargePanel" addStyleNames="{style.css.fullWidth}"/>
+                    </div>
+
+                </div>
+
+
+                <div style="height:16px"/>
+
+
+            </paper-material>
+
+        </pw:PaperHeaderPanel>
+
+
+    </g:HTMLPanel>
+
+</ui:UiBinder>

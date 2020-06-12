@@ -1,0 +1,117 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             xmlns:p='urn:import:com.petecode.common.client.widget.paper'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+             xmlns:mgwt="urn:import:com.googlecode.mgwt.ui.client.widget"
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="paperStyleBundle" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+    <ui:style field="localStyle">
+        .deleteButton[raised] {
+            background-color: red;
+        }
+
+        .card {
+            min-width: 320px;
+        }
+
+        .rootPanel {
+            min-height: 520px;
+        }
+    </ui:style>
+
+
+
+
+    <mgwt:panel.flex.RootFlexPanel orientation="HORIZONTAL" addStyleNames="{paperStyleBundle.css.fullPage} {localStyle.rootPanel}">
+        <g:ScrollPanel ui:field="frameScrollPanel">
+            <mgwt:panel.flex.FlexPanel orientation="HORIZONTAL" addStyleNames="{paperStyleBundle.css.fullWidth}">
+                <mgwt:panel.flex.FlexSpacer/>
+                <mgwt:panel.flex.FlexPanel orientation="VERTICAL" addStyleNames="{paperStyleBundle.css.fullWidth}">
+                    <w:toolbar.TitleBar ui:field="titleBar" backButton="true">
+                        <ui:msg>Account Membership</ui:msg>
+                    </w:toolbar.TitleBar>
+                    <mgwt:panel.flex.FlexPanel orientation="HORIZONTAL">
+                        <mgwt:panel.flex.FlexSpacer/>
+                        <mgwt:panel.flex.FlexPanel orientation="VERTICAL">
+
+                            <!-- Summary Card -->
+                            <mgwt:panel.flex.FlexPanel ui:field="cardPanel"
+                                                       orientation="VERTICAL"
+                                                       addStyleNames="{paperStyleBundle.css.card} {localStyle.card} {paperStyleBundle.css.shadow}"
+                                                       alignment="CENTER">
+
+
+                                <p:PaperLabel ui:field="accountNameField" width="200px">
+                                    <ui:msg>Account Name</ui:msg>
+                                </p:PaperLabel>
+                                <mgwt:panel.flex.FixedSpacer height="10px"/>
+                                <p:PaperLabel ui:field="accountMemberNameField" width="200px">
+                                    <ui:msg>Name</ui:msg>
+                                </p:PaperLabel>
+                                <mgwt:panel.flex.FixedSpacer height="10px"/>
+                                <p:PaperLabel ui:field="accountMemberEmailField" width="200px">
+                                    <ui:msg>Email</ui:msg>
+                                </p:PaperLabel>
+                                <mgwt:panel.flex.FixedSpacer height="16px"/>
+
+
+                                <mgwt:panel.flex.FlexPanel orientation="VERTICAL" alignment="CENTER"
+                                                           addStyleNames="{paperStyleBundle.css.tile}">
+                                    <mgwt:panel.flex.FlexSpacer/>
+
+                                    <g:Label stylePrimaryName="{paperStyleBundle.css.captionText}">
+                                        <ui:msg>
+                                            Membership type
+                                        </ui:msg>
+                                    </g:Label>
+
+                                    <g:HTMLPanel>
+                                    <paper-radio-group ui:field="accountRoleGroup">
+                                        <paper-radio-button  name="ADMIN">
+                                            <ui:msg>Administrator</ui:msg>
+                                        </paper-radio-button>
+                                        <paper-radio-button  name="EDIT_ECCS">
+                                            <ui:msg>Location Editor</ui:msg>
+                                        </paper-radio-button>
+                                        <paper-radio-button name="READ_ONLY">
+                                            <ui:msg>Read Only</ui:msg>
+                                        </paper-radio-button>
+                                    </paper-radio-group>
+                                    </g:HTMLPanel>
+
+                                </mgwt:panel.flex.FlexPanel>
+
+
+                                <mgwt:panel.flex.FlexPanel orientation="HORIZONTAL" addStyleNames="{paperStyleBundle.css.tile}">
+                                    <mgwt:panel.flex.FlexSpacer/>
+                                    <pw:PaperButton raised="true" ui:field="deleteButton" addStyleNames="{localStyle.deleteButton}">
+                                        <ui:msg>Delete</ui:msg>
+                                    </pw:PaperButton >
+                                    <mgwt:panel.flex.FlexSpacer/>
+                                </mgwt:panel.flex.FlexPanel>
+
+
+                            </mgwt:panel.flex.FlexPanel>
+                            <mgwt:panel.flex.FixedSpacer height="10px"/>
+                            <mgwt:panel.flex.FlexSpacer/>
+                        </mgwt:panel.flex.FlexPanel>
+                        <mgwt:panel.flex.FlexSpacer/>
+                    </mgwt:panel.flex.FlexPanel>
+                </mgwt:panel.flex.FlexPanel>
+                <mgwt:panel.flex.FlexSpacer/>
+            </mgwt:panel.flex.FlexPanel>
+        </g:ScrollPanel>
+    </mgwt:panel.flex.RootFlexPanel>
+</ui:UiBinder>

@@ -1,0 +1,71 @@
+
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             xmlns:p='urn:import:com.petecode.common.client.widget.paper'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="reqStringRes" type="com.ted.commander.client.resources.RequiredWebStringResource"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+
+
+    <g:HTMLPanel addStyleNames="{style.css.fullPage} ">
+
+        <style is="custom-style">
+            paper-material {
+            background-color: #FFF;
+            width:100%;
+            max-width: 600px;
+            min-width: 320px;
+            padding:24px;
+            margin: auto;
+            margin-top: 24px;
+            }
+
+        </style>
+        <pw:PaperHeaderPanel mode="standard" shadow="true">
+            <pw:PaperToolbar>
+                <w:toolbar.TitleBar ui:field="titleBar" backButton="true">
+                    <ui:msg>Change Username</ui:msg>
+                </w:toolbar.TitleBar>
+            </pw:PaperToolbar>
+            <paper-material>
+
+                <div class="paper-font-body1">
+                    <ui:msg>Please enter the new email address and confirmation. Click 'Update Username' to update your user
+                        account.
+                    </ui:msg>
+                </div>
+                <p:PaperInputDecorator label="{reqStringRes.email}" ui:field="newEmailField">
+
+                </p:PaperInputDecorator>
+                <p:PaperInputDecorator label="{reqStringRes.confirmEmail}" ui:field="confirmEmailField">
+
+                </p:PaperInputDecorator>
+
+
+                <div class="horizontal layout" style="margin-top:24px">
+                    <div class="flex"></div>
+                    <pw:PaperButton ui:field="saveButton">
+                        <ui:msg>Update Username</ui:msg>
+                    </pw:PaperButton>
+                    <div class="flex"></div>
+                </div>
+
+            </paper-material>
+
+        </pw:PaperHeaderPanel>
+
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

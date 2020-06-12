@@ -1,0 +1,136 @@
+<!--
+@license
+Copyright (c) 2015 The Energy Detective
+-->
+
+<script src='../../bower_components/page/page.js'></script>
+<script>
+
+  /* jshint camelcase: false */
+  var checkAuthorized = function(callback){
+
+    var refreshToken = window.localStorage.getItem('REFRESH_TOKEN');
+
+
+    var accessToken = window.sessionStorage.getItem('ACCESS_TOKEN');
+    var expiresTime = window.sessionStorage.getItem('ACCESS_TOKEN_EXPIRES');
+    var systemTime = (new Date()).getTime() - 1200000;
+
+
+//    console.log('--AccessToken: ' + accessToken);
+//    console.log('--refreshToken: ' + refreshToken);
+//    console.log('--expiresTime: ' + expiresTime);
+
+    if ((typeof refreshToken === 'undefined' || refreshToken === null)) {
+      console.log('REFRESH TOKEN UNDEFINED');
+      callback(false);
+    }
+
+    else if (typeof accessToken === 'undefined' || systemTime >= expiresTime){
+      //Refresh the token
+      var formContent = 'grant_type=refresh_token&client_id=web&scope=api&refresh_token=' + refreshToken;
+
+      var xmlhttp=new XMLHttpRequest();
+      xmlhttp.open('POST','/oauth/token',true);
+      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xmlhttp.setRequestHeader('Authorization', 'Basic d2ViOmNvbW1hbmRlckFQSQ==');
+      xmlhttp.send(formContent);
+      xmlhttp.onload =function () {
+        if (xmlhttp.readyState === 4) {
+//            console.log('Response Received: ' + xmlhttp.status);
+          if (xmlhttp.status === 200) {
+//              console.log('Response: ' + xmlhttp.responseText);
+            var response = JSON.parse(xmlhttp.responseText);
+
+            var expires = (new Date()).getTime();
+            expires += (response.expires_in * 1000);
+            window.sessionStorage.clear();
+            window.sessionStorage.setItem('ADMIN_ACCESS_TOKEN', response.access_token);
+            window.sessionStorage.setItem('ACCESS_TOKEN_EXPIRES', expires);
+
+//                  console.log('AccessToken: ' + accessToken);
+//                  console.log('refreshToken: ' + refreshToken);
+//                  console.log('expiresTime: ' + expiresTime);
+
+
+            //SET THE FIELDS
+
+            callback(true);
+          } else {
+            callback(false);
+          }
+        }
+      };
+
+
+    } else {
+      //TODO: Low overhead keep alive before redirecting to page? User Lookup?
+      callback(true);
+    }
+  };
+
+  var authorizedNavigation = function(destPage, data){
+    checkAuthorized(function(value){
+      if (value) {
+        if (typeof data !== 'undefined'){
+
+          app.params = data.params;
+        }
+        app.route = destPage;
+        console.log('----------' + app.route);
+      }
+      else {
+        console.log('------not authorized');
+        app.route = 'login';
+      }
+    });
+  };
+
+  window.addEventListener('WebComponentsReady', function() {
+
+    // We use Page.js for routing. This is a Micro
+    // client-side router inspired by the Express router
+    // More info: https://visionmedia.github.io/page.js/
+
+
+    page('/login', function () {
+      window.sessionStorage.clear();
+      window.localStorage.clear();
+      app.route = 'login';
+
+    });
+
+    page('/logout', function () {
+      window.sessionStorage.clear();
+      window.localStorage.clear();
+      app.route = 'login';
+
+    });
+
+
+    page('/', function () {
+      authorizedNavigation('userSearch');
+
+    });
+
+    page('/search', function () {
+      authorizedNavigation('userSearch');
+
+    });
+
+    page('/userAdmin/:userId', function (data) {
+      authorizedNavigation('userAdmin', data);
+    });
+
+    page('/userAdmin/:userId/accounts/:accountId', function (data) {
+      authorizedNavigation('accountAdmin', data);
+    });
+
+    // add #! before urls
+    page({
+      hashbang: true
+    });
+
+
+  });
+</script>

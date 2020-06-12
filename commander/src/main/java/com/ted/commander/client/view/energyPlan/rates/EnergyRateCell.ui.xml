@@ -1,0 +1,26 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:style field="localStyle" src="../../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+
+    </ui:style>
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+    <g:HTMLPanel>
+        <div class="{style.css.horizontal} {style.css.alignCenter}" style="padding-right:8px">
+            <w:NumericTextBox addStyleNames="{style.css.body1Text}" width="90px" ui:field="cellField" decimalPlaces="5"
+                              minValue="0" maxValue="999.99999" placeHolder=""/>
+            <div style="font-size:8pt; padding-left:4px" class="{style.css.captionText}" ui:field="currencyType"/>
+        </div>
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

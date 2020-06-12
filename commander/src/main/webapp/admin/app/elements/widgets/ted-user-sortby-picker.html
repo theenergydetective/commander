@@ -1,0 +1,120 @@
+<!--
+@license
+Copyright (c) 2015 Jibehome. All Rights Reserved
+-->
+
+<dom-module id="ted-user-sortby-picker">
+    <style>
+        :host {
+            display: block;
+        }
+
+        .actionPlanDialog {
+          position:absolute;
+          background-color: #FFF;
+          margin:0;
+          width:275px;
+
+        }
+
+        .menuItem:hover{
+          cursor: pointer; cursor: hand;
+          background-color: var(--divider-color);
+
+        }
+
+    </style>
+    <template>
+      <!-- The paper-drop down is in progress. This is a quick and dirty implementation since our needs are fairly simple-->
+
+      <!--Drop down list-->
+      <paper-dialog id="actionPlanDialog" class="actionPlanDialog">
+        <paper-menu>
+          <paper-item class="menuItem" on-click="onDateAdded">Date Added</paper-item>
+          <paper-item class="menuItem" on-click="onAccountState">Account State</paper-item>
+          <paper-item class="menuItem" on-click="onEmail">Email</paper-item>
+          <paper-item class="menuItem" on-click="onLastName">Last Name</paper-item>
+        </paper-menu>
+      </paper-dialog>
+
+      <content>
+        <div class="horizontal">
+          <paper-input id="dropdownText" style="width:250px" readonly on-click="showMenu">{{selectedItem}}</paper-input>
+          <iron-icon icon="icons:arrow-drop-down" on-click="showMenu" style="top:-32px; left:224px"></iron-icon>
+        </div>
+
+      </content>
+
+
+
+     </template>
+</dom-module>
+<script>
+    (function() {
+        Polymer({
+            is: 'ted-user-sortby-picker',
+            properties: {
+              _logger:Object,
+              defaultValue:{
+                type: Number,
+                notify: true}
+
+            },
+            observers: [
+              'defaultValueHandler(defaultValue)'
+            ],
+            created: function(){
+              this._logger = LoggerFactory.getLogger(this);
+              this._logger.debug('Created');
+            },
+            showMenu:function(){
+              var rect = this.$.dropdownText.getBoundingClientRect();
+              this.$.actionPlanDialog.style.position = 'fixed';
+              this.$.actionPlanDialog.style.top = (rect.bottom) + 'px';
+              this.$.actionPlanDialog.style.left = (rect.left) + 'px';
+              this.$.actionPlanDialog.open();
+            },
+            onDateAdded: function(){
+              this.$.actionPlanDialog.close();
+              this.$.dropdownText.value = 'Date Added';
+              this.fire('selected', 0);
+
+            },
+          onEmail: function(){
+            this.$.actionPlanDialog.close();
+            this.$.dropdownText.value = 'Email';
+            this.fire('selected', 1);
+
+          },
+          onAccountState: function(){
+            this.$.actionPlanDialog.close();
+            this.$.dropdownText.value = 'Account State';
+            this.fire('selected', 3);
+
+          },
+            onLastName: function(){
+              this.$.actionPlanDialog.close();
+              this.$.dropdownText.value = 'Last Name';
+              this.fire('selected', 2);
+            },
+            defaultValueHandler: function(value){
+              switch(value){
+                case 0: {
+                  this.$.dropdownText.value = 'Date Added';
+                  break;
+                }
+                case 1: {
+                  this.$.dropdownText.value = 'Email';
+                  break;
+                }
+
+                case 2: {
+                  this.$.dropdownText.value = 'Last Name';
+                  break;
+                }
+
+              }
+            }
+        });
+    })();
+</script>

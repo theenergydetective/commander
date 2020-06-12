@@ -1,0 +1,17 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ted5000 GWID="FFFF01" auth="1234567890" ver="625">
+    <COST mrd="1" fixed="0.00" min="0.00"/>
+    <DEMAND kVA="0">
+        <demandCost timestamp="1401111120" peak="9.671" cost="17.99" rate="20.00"/>
+    </DEMAND>
+    <MTU ID="000001" type="0" ver="600">
+        <cumulative timestamp="1401111120" watts="2000000" rate="0.10000" pf="100.0" voltage="240.0"/>
+        <cumulative timestamp="1401111420" watts="6000000" rate="0.10000" pf="100.0" voltage="240.0"/>
+    </MTU>
+    <SPY ID="00000101">
+        <cumulative timestamp="1401111120" watts="4000000" rate="0.10000" pf="99.8" voltage="130.0"/>
+    </SPY>
+</ted5000>

@@ -1,0 +1,75 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:m='urn:import:com.ted.commander.client.view.adviceEdit.triggerTiles'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+
+    <ui:style field="localStyle" gss="true">
+        .caption {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.011em;
+            line-height: 14px;
+            color: #727272;
+            text-align: left;
+            width:100%;
+
+        }
+
+        .paperSelect {
+            font-family: 'Roboto', 'Noto', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: transparent;
+            border-top-width: 0;
+            border-left-width: 0;
+            border-right-width: 0;
+            border-color: black;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            margin-bottom:4px;
+            width:100%;
+        }
+
+
+    </ui:style>
+
+
+    <g:HTMLPanel addStyleNames="{style.css.clickable}">
+        <style is="custom-style">
+            .numericInput {
+                --paper-input-container-label {
+                color: #727272;
+                }
+            }
+        </style>
+
+        <div class="vertical center layout">
+
+            <paper-input error-message="required" style="width:100%" label="Exceeds (V)" type="number" min="0" max="600" ui:field="exceedsField" required="true"></paper-input>
+
+            <div class="{localStyle.caption}" style="margin-top:8px"><ui:msg>Send At Most</ui:msg></div>
+            <g:ListBox addStyleNames="{localStyle.paperSelect}" ui:field="atMostField">
+                <g:item><ui:msg>Once Per Minute</ui:msg></g:item>
+                <g:item><ui:msg>Once Per Hour</ui:msg></g:item>
+                <g:item><ui:msg>Once Per Day</ui:msg></g:item>
+                <g:item><ui:msg>Once Per Billing Cycle</ui:msg></g:item>
+            </g:ListBox>
+
+
+            <m:AlarmRangeWidget ui:field="alarmRateWidget"></m:AlarmRangeWidget>
+
+        </div>
+
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

@@ -1,0 +1,88 @@
+<!--
+@license
+Copyright (c) 2015 Jibehome. All Rights Reserved
+-->
+
+<dom-module id="ted-user-status">
+    <style>
+        :host {
+            display: block;
+        }
+
+
+
+    </style>
+    <template>
+
+      <iron-ajax id="user_ajax"
+                 handle-as="json"
+                 content-type='application/json'
+                 loading="{{loading}}"
+                 on-error="onError"
+                 method="put"
+        >
+      </iron-ajax>
+      <!-- The paper-drop down is in progress. This is a quick and dirty implementation since our needs are fairly simple-->
+
+
+
+
+      <content>
+
+        <paper-dialog id='errorDialog' style='background-color: #FFF; max-width:320px' >
+          <h2>Error</h2>
+          <div class='paper-font-body1'>
+            There was an error updating the user's state. Please log out and try again.
+          </div>
+          <div class='buttons'>
+            <paper-button dialog-confirm autofocus>Done</paper-button>
+          </div>
+        </paper-dialog>
+
+        <paper-radio-group id="userStateGroup"  selected="{{user.userState}}" on-iron-select="userValueHandler">
+            <paper-radio-button name="WAITING_ACTIVATION">Waiting Activation</paper-radio-button>
+            <paper-radio-button name="ENABLED">Enabled</paper-radio-button>
+            <paper-radio-button name="INVITED">Invited</paper-radio-button>
+            <paper-radio-button name="DISABLED">Disabled</paper-radio-button>
+          </paper-radio-group>
+
+
+
+
+
+      </content>
+     </template>
+</dom-module>
+<script>
+    (function() {
+        Polymer({
+            is: 'ted-user-status',
+            properties: {
+              _logger:Object,
+            },
+            observers: [
+
+            ],
+
+            created: function(){
+              this._logger = LoggerFactory.getLogger(this);
+              this._logger.debug('Created');
+            },
+            onError: function(){
+              this.$.errorDialog.open();
+            },
+
+            userValueHandler: function(r){
+              var body = {
+                stringValue: this.user.userState
+              };
+              this._logger.info('Updating User State to ' + JSON.stringify(body));
+              this.$.user_ajax.url = '/api/admin/user/' + this.user.id + '/userState';
+              this.$.user_ajax.headers= {'Authorization': 'Bearer ' + window.sessionStorage.getItem('ACCESS_TOKEN')};
+              this.$.user_ajax.body = JSON.stringify(body);
+              this.$.user_ajax.generateRequest();
+
+            }
+        });
+    })();
+</script>

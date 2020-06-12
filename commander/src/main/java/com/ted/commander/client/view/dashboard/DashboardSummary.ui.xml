@@ -1,0 +1,70 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:style field="localStyle">
+        .summaryLabel {
+            margin-bottom:4px;
+            opacity: .54;
+        }
+    </ui:style>
+
+
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+    <g:HTMLPanel addStyleNames="vertical layout" ui:field="mainPanel">
+            <div class="horizontal around-justified layout" style="width:100%;">
+                <div class="paper-font-title" ui:field="dashboardTitleLabel"></div>
+            </div>
+
+            <div class="horizontal around-justified layout" style="width:100%;">
+
+
+                <div class="vertical start layout" ui:field="daysLeftField">
+                    <div class="paper-font-caption {localStyle.summaryLabel}"><ui:msg>Days left</ui:msg></div>
+                    <div class="paper-font-subhead" ui:field="daysLeftValue"/>
+                </div>
+
+                <div class="vertical start layout" ui:field="rateInEffectField">
+                    <div class="paper-font-caption {localStyle.summaryLabel}"><ui:msg>Rate in Effect</ui:msg></div>
+                    <div class="paper-font-subhead" ui:field="rateInEffectValue"/>
+                </div>
+
+                <div class="vertical start layout" ui:field="rateField">
+                    <div class="paper-font-caption {localStyle.summaryLabel}"><ui:msg>Rate</ui:msg></div>
+                    <div class="paper-font-subhead" ui:field="rateValue"/>
+                </div>
+
+
+                <div class="vertical start layout" ui:field="projKWHField">
+                    <div class="paper-font-caption {localStyle.summaryLabel}" ui:field="projKWHFieldLabel"><ui:msg>Projected kWh</ui:msg></div>
+                    <div class="paper-font-subhead" ui:field="projKWHValue"/>
+                </div>
+
+                <div class="vertical start layout" ui:field="projBillField">
+                    <div class="paper-font-caption {localStyle.summaryLabel}" ui:field="projBillFieldLabel"><ui:msg>Projected Bill</ui:msg></div>
+                    <div class="paper-font-subhead" ui:field="projBillValue"/>
+                </div>
+
+
+                <div class="vertical start layout" ui:field="demandPeakField">
+                    <div class="paper-font-caption {localStyle.summaryLabel}" ui:field="demandPeakFieldLabel"><ui:msg>Demand Peak</ui:msg></div>
+                    <div class="paper-font-subhead" ui:field="demandPeakValue"/>
+                </div>
+
+                <div class="vertical start layout" ui:field="demandCostField">
+                    <div class="paper-font-caption {localStyle.summaryLabel}"><ui:msg>Demand Cost</ui:msg></div>
+                    <div class="paper-font-subhead" ui:field="demandCostValue"/>
+                </div>
+
+            </div>
+    </g:HTMLPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,18 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+
+
+    <g:HTMLPanel addStyleNames="horizontal center layout">
+        <w:NumberPicker maxNumber="12" minNumber="1" leadZero="false" ui:field="hourField"/>
+        <div style="width:8px"/>
+        <w:NumberPicker maxNumber="59" minNumber="0" leadZero="true" ui:field="minField"/>
+        <div style="width:8px"/>
+        <w:AMPMPicker ui:field="amPmField"/>
+    </g:HTMLPanel>
+
+</ui:UiBinder>

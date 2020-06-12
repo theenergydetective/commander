@@ -1,0 +1,123 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             xmlns:p='urn:import:com.petecode.common.client.widget.paper'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+
+    <ui:with field="paperStyleBundle" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+
+    <ui:style field="localStyle">
+
+        .whiteIcon #icon {
+            color: #FFF;
+            opacity: 1;
+        }
+
+        .max {
+            height: 100%;
+            width: 100%;
+        }
+
+        .titleIcon #icon {
+            color: #FFF;
+        }
+
+        .noPad {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .accountPicker {
+            color: #FFF;
+            width: 320px;
+
+
+        }
+
+    </ui:style>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+
+    <g:HTMLPanel addStyleNames="{localStyle.max}">
+
+        <style is="custom-style">
+            paper-material {
+                background-color: #FFF;
+                width:100%;
+                max-width: 600px;
+                min-width: 300px;
+                margin-top: 24px;
+                padding:0;
+                padding-left:16px;
+                padding-right:16px;
+            }
+
+            .fab {
+                position: fixed;
+                top: calc(100% - 80px);
+                left: calc(100% - 80px);
+                z-index: 999;
+            }
+
+            .paperToolbar{
+                @apply(--medium);
+            }
+
+            @media (max-width: 600px) {
+                .paperToolbar[
+                    @apply(--medium-tall);
+                }
+            }
+
+        </style>
+
+        <pw:PaperHeaderPanel mode="standard" shadow="true">
+            <paper-toolbar class="paperToolbar" justify="justified">
+                    <div class="horizontal start center layout">
+                        <pw:PaperIconButton icon="icons:chevron-left" ui:field="backButton" addStyleNames="{localStyle.titleIcon}" />
+                        <div class="title" style="color:#FFF"><ui:msg>Locations</ui:msg></div>
+                    </div>
+                    <div>
+                        <w:AccountPicker ui:field="accountPicker" addStyleNames="{localStyle.accountPicker}"/>
+                    </div>
+                    <div></div>
+            </paper-toolbar>
+
+            <div class="horizontal layout">
+                <div class="flex"></div>
+
+
+                    <pw:PaperMaterial addStyleNames="vertical center layout">
+
+                        <div class="paper-font-body2" ui:field="noLocationDiv" style="padding:36px">
+                            <ui:msg>
+                                You currently do not have any locations created for your account. Please click the '+' icon below to add a new location.
+                            </ui:msg>
+                        </div>
+
+                        <g:VerticalPanel ui:field="locationTiles" addStyleNames="{localStyle.noPad}"/>
+                    </pw:PaperMaterial>
+
+                <div class="flex"></div>
+            </div>
+                <p:PaperTooltip label="{stringRes.add}" position="top">
+                    <pw:PaperFab icon="icons:add" ui:field="addButton" addStyleNames="fab"/>
+                </p:PaperTooltip>
+
+
+        </pw:PaperHeaderPanel>
+
+
+
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

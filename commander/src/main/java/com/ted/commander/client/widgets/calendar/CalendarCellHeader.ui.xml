@@ -1,0 +1,39 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:style field="calStyle" src="calendar.css"/>
+
+    <ui:style field="cellStyle">
+        .calendarHeaderCellLabel {
+            border: none;
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .captionText{
+            font-size: 8pt;
+        }
+    </ui:style>
+
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+    <g:SimplePanel ui:field="contentField" stylePrimaryName="{calStyle.calendarHeaderCell}">
+        <g:Label addStyleNames="{style.css.captionText} {style.css.secondaryText} {cellStyle.calendarHeaderCellLabel}"
+                 ui:field="dayOfWeekField"/>
+    </g:SimplePanel>
+
+
+</ui:UiBinder>

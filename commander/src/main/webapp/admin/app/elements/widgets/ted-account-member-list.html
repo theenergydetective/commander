@@ -1,0 +1,144 @@
+<!--
+@license
+Copyright (c) 2015 Jibehome. All Rights Reserved
+-->
+
+<dom-module id="ted-account-member-list">
+    <style>
+        :host {
+            display: block;
+        }
+
+        .item {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        @apply(--layout-around-justified);
+          padding: 20px;
+          background-color: white;
+          cursor: pointer; cursor: hand;
+          border: solid;
+          border-width: 0;
+          border-bottom-width:1px;
+          border-color: var(--divider-color);
+        }
+
+        .fab {
+          position: fixed;
+          top: calc(100% - 80px);
+          left: calc(100% - 80px);
+        }
+
+    </style>
+    <template>
+
+      <paper-dialog id='addMemberDialog' style='background-color: #FFF; max-width:320px;'>
+        <h2>Add Member</h2>
+        <div class='paper-font-body1'>
+          Please enter the email address of the user you would like to add. This will add them as an ADMIN.
+        </div>
+        <paper-input id="addEmailAddress" label="emailAddress"></paper-input>
+        <div class='buttons'>
+          <paper-button dialog-dismiss>Cancel</paper-button>
+          <paper-button dialog-confirm autofocus on-click="addMember">Done</paper-button>
+        </div>
+      </paper-dialog>
+
+
+      <paper-dialog id='deleteMemberDialog' style='background-color: #FFF; max-width:320px;'>
+        <h2>Add Member</h2>
+        <div class='paper-font-body1'>
+          Are you sure you would like to remove this member?
+        </div>
+        <div class="paper-font-headline">[[memberToDelete.user.username]]</div>
+        <div class='buttons'>
+          <paper-button dialog-dismiss>Cancel</paper-button>
+          <paper-button dialog-confirm autofocus on-click="deleteMember">Done</paper-button>
+        </div>
+      </paper-dialog>
+
+
+      <iron-ajax id="account_ajax"
+                 handle-as="json"
+                 content-type='application/json'
+                 loading="{{loading}}"
+                 method="get"
+                 last-response="{{members}}"
+        >
+      </iron-ajax>
+
+
+      <iron-ajax id="add_member_ajax" handle-as="json" content-type='application/json' loading="{{loading}}" method="put" on-response="reload"></iron-ajax>
+      <iron-ajax id="delete_member_ajax" handle-as="json" content-type='application/json' loading="{{loading}}" method="delete" on-response="reload"></iron-ajax>
+      <!-- The paper-drop down is in progress. This is a quick and dirty implementation since our needs are fairly simple-->
+
+      <content>
+        <div>
+          <paper-fab raised icon="social:person-add" title="Add" class="fab" on-click="addMemberClick" elevation="3"></paper-fab>
+
+        <template is="dom-repeat" items="[[members]]">
+          <div class="item" on-click="itemSelected">
+            <div class="paper-font-body1" style="overflow:hidden;width:250px;text-overflow: ellipsis;">[[item.user.username]]</div>
+            <div class="paper-font-body1" style="width:75px">[[item.accountRole]]</div>
+            <iron-icon icon="delete"/>
+          </div>
+        </template>
+        </div>
+      </content>
+     </template>
+</dom-module>
+<script>
+    (function() {
+        Polymer({
+            is: 'ted-account-member-list',
+            properties: {
+              _logger:Object,
+              account: Object,
+            },
+            observers: [
+              'accountValueHandler(account)'
+            ],
+            created: function(){
+              this._logger = LoggerFactory.getLogger(this);
+              this._logger.debug('Created');
+            },
+          itemSelected:function(r){
+            this._logger.debug('Selected ' + JSON.stringify(r.model.item));
+            this.memberToDelete = r.model.item;
+            this.$.deleteMemberDialog.open();
+          },
+          reload:function(){
+            this.$.account_ajax.url = '/api/admin/account/' + this.account.id + '/members';
+            this.$.account_ajax.headers = {'Authorization': 'Bearer ' + window.sessionStorage.getItem('ACCESS_TOKEN')};
+            this.$.account_ajax.generateRequest();
+          },
+          accountValueHandler: function(account){
+              this.$.account_ajax.url = '/api/admin/account/' + account.id + '/members';
+              this.$.account_ajax.headers = {'Authorization': 'Bearer ' + window.sessionStorage.getItem('ACCESS_TOKEN')};
+              this.$.account_ajax.generateRequest();
+            },
+          addMemberClick:function(){
+            this.$.addMemberDialog.open();
+          },
+          addMember:function(){
+            var emailAddress = this.$.addEmailAddress.value;
+            if (emailAddress.length > 0) {
+              this._logger.debug('Adding member ' + emailAddress);
+              var body = {
+                stringValue: emailAddress
+              };
+              this._logger.debug('Adding ' + JSON.stringify(body));
+
+              this.$.add_member_ajax.url = '/api/admin/account/' + this.account.id + '/members';
+              this.$.add_member_ajax.headers = {'Authorization': 'Bearer ' + window.sessionStorage.getItem('ACCESS_TOKEN')};
+              this.$.add_member_ajax.body = JSON.stringify(body);
+              this.$.add_member_ajax.generateRequest();
+            }
+          },
+          deleteMember:function(){
+            this.$.delete_member_ajax.url = '/api/admin/account/' + this.account.id + '/members/' + this.memberToDelete.id;
+            this.$.delete_member_ajax.headers = {'Authorization': 'Bearer ' + window.sessionStorage.getItem('ACCESS_TOKEN')};
+            this.$.delete_member_ajax.generateRequest();
+          }
+        });
+    })();
+</script>

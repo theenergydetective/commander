@@ -1,0 +1,26 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:style field="localStyle" src="../../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+
+    </ui:style>
+
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+
+
+    <g:VerticalPanel horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE">
+        <g:HorizontalPanel horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE">
+            <g:Label ui:field="rowLabel" stylePrimaryName="{style.css.captionText}" width="70px"/>
+            <g:HorizontalPanel ui:field="cellPanel" horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_MIDDLE"/>
+        </g:HorizontalPanel>
+        <g:AbsolutePanel width="1px" height="3px"/>
+    </g:VerticalPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,37 @@
+<!--
+  ~ Copyright (c) 2014. The Energy Detective. All Rights Reserved.
+  -->
+
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+
+
+    <ui:style field="localStyle" src="../../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+    </ui:style>
+
+    <g:HTMLPanel>
+        <div class="{style.css.vertical} {style.css.fullWidth}">
+            <div class="{style.css.horizontal} {style.css.alignCenter}">
+                <paper-checkbox ui:field="questionCB"></paper-checkbox>
+                <div class="{style.css.body1Text}"  ui:field="questionField" style="padding-left:16px"/>
+            </div>
+
+            <div class="{style.css.horizontal} {style.css.alignCenter}">
+                <g:FlowPanel ui:field="contentPanel"/>
+            </div>
+        </div>
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

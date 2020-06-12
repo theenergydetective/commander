@@ -1,0 +1,21 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+
+
+    <g:HorizontalPanel horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_Middle">
+        <g:HorizontalPanel horizontalAlignment="ALIGN_LEFT" verticalAlignment="ALIGN_Middle" ui:field="peakPanel">
+            <w:timePicker.TimePicker ui:field="touStartField" width="40px" interval="15"/>
+            <g:AbsolutePanel width="8px" height="1px"/>
+            <w:timePicker.TimePicker ui:field="touEndField" width="40px" interval="15"/>
+        </g:HorizontalPanel>
+    </g:HorizontalPanel>
+
+</ui:UiBinder>

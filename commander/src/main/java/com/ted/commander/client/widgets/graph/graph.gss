@@ -1,0 +1,166 @@
+@def PRIMARY eval("com.petecode.common.client.widget.paper.PaperStyleManager.getPrimary()");
+@def PRIMARY_LIGHT eval("com.petecode.common.client.widget.paper.PaperStyleManager.getPrimaryLight()");
+@def PRIMARY_DARK eval("com.petecode.common.client.widget.paper.PaperStyleManager.getPrimaryDark()");
+@def ACCENT eval("com.petecode.common.client.widget.paper.PaperStyleManager.getAccent()");
+@def DEFAULT_TEXT eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDefaultText()");
+@def SECONDARY_TEXT eval("com.petecode.common.client.widget.paper.PaperStyleManager.getSecondaryText()");
+@def BACKGROUND_COLOR eval("com.petecode.common.client.widget.paper.PaperStyleManager.getBackground()");
+@def DIVIDER_COLOR eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDivider()");
+@def ERROR_COLOR eval("com.petecode.common.client.widget.paper.PaperStyleManager.getError()");
+
+@def M4DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(4)");
+@def M8DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(8)");
+@def M12DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(12)");
+@def M16DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(16)");
+@def M20DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(20)");
+@def M24DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(24)");
+@def M32DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(32)");
+@def M36DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(36)");
+@def M40DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(40)");
+@def M44DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(44)");
+@def M48DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(48)");
+@def M56DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(56)");
+@def M72DP eval("com.petecode.common.client.widget.paper.PaperStyleManager.getDPToPx(72)");
+
+
+.graphBackground {
+    background: #FFF;
+}
+
+
+.svg {
+    margin: 0;
+}
+
+.axis text {
+  font-family: 'Roboto', serif;
+  font: 9px sans-serif;
+}
+
+
+
+.axis {
+    shape-rendering: crispEdges;
+    stroke-width: 1px;
+    padding:4px;
+
+}
+
+.x.axis line {
+    stroke: #dddddd;
+    opacity: .6;
+    stroke-width: 1px;
+
+}
+
+
+.x.axis path {
+    display: none;
+}
+
+
+.y.axis line{
+    stroke: #dddddd;
+    stroke-width: 3px;
+}
+
+
+.y.axis path {
+    display: none;
+}
+
+
+.overlay{
+    opacity:0;
+}
+
+path.weatherFill {
+
+    stroke-width: 0;
+    opacity: .7;
+}
+
+path.weatherLine {
+    fill: transparent;
+    stroke-width: 3px;
+    opacity: 1;
+}
+
+
+path.netFill {
+    fill: #0000FF;
+    stroke: #0000FF;
+    stroke-width: 0;
+    opacity: .1;
+}
+
+path.netLine {
+    fill: transparent;
+    stroke: #0000FF;
+    stroke-width: 3px;
+    opacity: 1;
+}
+
+path.genFill {
+    fill: #00FF00;
+    stroke: #00FF00;
+    stroke-width: 0;
+    opacity: .1;
+}
+
+path.genLine {
+    fill: transparent;
+    stroke: #00FF00;
+    stroke-width: 3px;
+    opacity: 1;
+}
+
+
+path.loadFill {
+    fill: #FF0000;
+    stroke: #FF0000;
+    stroke-width: 0;
+    opacity: .1;
+}
+
+path.loadLine {
+    fill: transparent;
+    stroke: #FF0000;
+    stroke-width: 2px;
+    opacity: 1;
+}
+
+
+text {
+    font-family: 'Roboto', serif;
+    font: 12px sans-serif;
+
+}
+
+
+.cursorText {
+    stroke: transparent;
+    font-family: 'Roboto', serif;
+    font-size: 16px;
+    text-align: left;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  vertical-align:middle;
+  margin:auto;
+  min-width: M72DP;
+  min-height: M24DP;
+  padding: M8DP;
+  font: M12DP sans-serif;
+  background: #ddd;
+  border: solid 1px #aaa;
+  border-radius: M8DP;
+  pointer-events: none;
+  z-index:10;
+  left:0;
+  top:0;
+  color: #000;
+  stroke: #000;
+}

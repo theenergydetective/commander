@@ -1,0 +1,115 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+    <ui:style field="localStyle">
+        .max {
+            height: 100%;
+            width: 100%;
+        }
+
+        .rotate {
+            -ms-transform: rotate(180deg); /* IE 9 */
+            -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+            transform: rotate(180deg);
+        }
+
+        .graphPanel {
+            width: 100%;
+            max-width: calc(98% - 32px);
+            padding: 16px;
+            background-color: #FFF;
+            height: 100%;
+        }
+
+    </ui:style>
+
+
+    <g:HTMLPanel addStyleNames="{localStyle.max}">
+        <style is="custom-style">
+            paper-material {
+            background-color: #FFF;
+            width:100%;
+            max-width: calc(98% - 32px);
+            min-width: 320px;
+            margin-top: 24px;
+            padding:0;
+            padding-left:16px;
+            padding-right:16px;
+            }
+            .paperToolbar{
+            @apply(--medium);
+            }
+        </style>
+
+        <pw:PaperHeaderPanel mode="standard" shadow="true">
+            <paper-toolbar class="paperToolbar">
+                <w:toolbar.TitleBar ui:field="titleBar" backButton="true">
+                    <ui:msg key="daileyKey">Daily View</ui:msg>
+                </w:toolbar.TitleBar>
+                <div class="flex"></div>
+
+                <div class="horizontal center layout">
+                    <pw:PaperIconButton icon="av:play-arrow" ui:field="prevDayButton"
+                                        addStyleNames="{localStyle.rotate} {style.css.whiteIcon}"/>
+                    <div class="flex"></div>
+                    <div class="paper-font-title" ui:field="dayLabel"/>
+                    <div class="flex"></div>
+                    <pw:PaperIconButton icon="av:play-arrow" ui:field="nextDayButton"
+                                        addStyleNames="{style.css.whiteIcon}"/>
+                </div>
+
+
+            </paper-toolbar>
+
+
+            <div class="horizontal justified layout">
+                <!-- Content -->
+                <!-- Summary Card -->
+                <div class="flex"></div>
+
+                <div class="vertical center layout" style="width:100%">
+
+                    <paper-tabs selected="0" style="width:100%;" class="horizontal around-justified center layout"
+                                ui:field="displayTabElement">
+                        <paper-tab>
+                            <ui:msg>Statistics</ui:msg>
+                        </paper-tab>
+                        <paper-tab>
+                            <ui:msg>Line</ui:msg>
+                        </paper-tab>
+                        <paper-tab>
+                            <ui:msg>Bar</ui:msg>
+                        </paper-tab>
+                        <paper-tab>
+                            <ui:msg>Pie</ui:msg>
+                        </paper-tab>
+                    </paper-tabs>
+
+                    <paper-material class="vertical center layout" elevation="2" ui:field="materialField">
+                        <g:SimplePanel ui:field="graphPanel" addStyleNames="{localStyle.graphPanel}"/>
+                    </paper-material>
+                </div>
+                <div class="flex"></div>
+
+
+            </div>
+
+
+        </pw:PaperHeaderPanel>
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

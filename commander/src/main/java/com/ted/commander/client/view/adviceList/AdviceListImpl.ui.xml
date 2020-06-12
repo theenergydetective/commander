@@ -1,0 +1,117 @@
+<!--
+  ~ Copyright 2015 The Energy Detective. All Rights Reserved.
+  -->
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w='urn:import:com.ted.commander.client.widgets'
+             xmlns:p='urn:import:com.petecode.common.client.widget.paper'
+             xmlns:pw='urn:import:com.vaadin.polymer.paper.widget'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:style field="localStyle">
+
+        .whiteIcon #icon {
+            color: #FFF;
+            opacity: 1;
+        }
+
+        .max {
+            height: 100%;
+            width: 100%;
+        }
+        .titleIcon #icon{
+            color:#FFF;
+        }
+
+        .noPad{
+            margin:0;
+            padding:0;
+            width: 100%;
+        }
+
+        .accountPicker {
+            color: #FFF;
+            width: 320px;
+
+
+        }
+
+    </ui:style>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+
+    <g:HTMLPanel addStyleNames="{localStyle.max}">
+
+        <style is="custom-style">
+            .listMaterial {
+                background-color: #FFF;
+                width:100%;
+                max-width: 600px;
+                min-width: 300px;
+                margin-top: 24px;
+                padding:0;
+            }
+
+
+            .noAdviceField {
+                max-width: 600px;
+                margin:24px;
+                color: #727272;
+                text-align:center;
+            }
+
+
+            .fab {
+                position: fixed;
+                top: calc(100% - 80px);
+                left: calc(100% - 80px);
+                z-index: 999;
+            }
+
+
+        </style>
+
+        <paper-header-panel>
+            <paper-toolbar justify="justified">
+                <div class="horizontal start center layout">
+                    <pw:PaperIconButton icon="icons:chevron-left" ui:field="backButton" addStyleNames="{localStyle.titleIcon}" />
+                    <div class="title" style="color:#FFF"><ui:msg>Advisor</ui:msg></div>
+                </div>
+                <div>
+                    <w:AccountPicker ui:field="accountPicker" addStyleNames="{localStyle.accountPicker}"/>
+                </div>
+                <div></div>
+            </paper-toolbar>
+
+            <div ui:field="noAdviceField" class="vertical center center-center layout fit">
+                <div class="paper-font-subhead noAdviceField">
+                    <ui:msg>
+                        You currently do not have any TED Advisor notifications set up.
+                        To set up a notification, please click the 'plus' icon below.
+                    </ui:msg>
+                </div>
+            </div>
+
+            <div class="vertical center layout" style="width:100%">
+                <paper-material class="listMaterial" ui:field="adviceDiv">
+                    <g:VerticalPanel ui:field="advicePanel" addStyleNames="{style.css.fullWidth}">
+                    </g:VerticalPanel>
+                </paper-material>
+            </div>
+
+            <div class="fab" ui:field="fabDiv">
+                <p:PaperTooltip label="{stringRes.add}" position="top">
+                    <pw:PaperFab  icon="icons:add" ui:field="addButton"
+                                  addStyleNames="{style.css.shadow}"/>
+                </p:PaperTooltip>
+            </div>
+
+
+        </paper-header-panel>
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

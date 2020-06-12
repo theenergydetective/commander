@@ -1,0 +1,35 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:p='urn:import:com.petecode.common.client.widget.paper'
+             xmlns:my='urn:import:com.ted.commander.client.view.energyPlan.tou'
+             ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+             ui:generateKeys="com.google.gwt.i18n.rebind.keygen.MD5KeyGenerator"
+             ui:generateLocales="default">
+
+    <ui:with field="style" type="com.petecode.common.client.widget.paper.PaperStyleBundle"/>
+    <ui:with field="stringRes" type="com.ted.commander.client.resources.WebStringResource"/>
+    <ui:with field="imageRes" type="com.ted.commander.client.resources.DefaultImageResource"/>
+    <ui:style field="localStyle" src="../../../style/commanderStyle.gss"
+              type="com.ted.commander.client.style.CommanderStyle" gss="true">
+
+        .labelField {
+            width:100px;
+            padding-right:8px;
+        }
+    </ui:style>
+
+    <g:HTMLPanel>
+        <div class="horizontal center layout">
+            <p:PaperInputDecorator ui:field="touLabel" maxlength="20" alwaysFloatLabel="false" addStyleNames="{localStyle.labelField}">
+            </p:PaperInputDecorator>
+            <div ui:field="offPeakPanel" class="paper-font-body1"><ui:msg>All Other Times</ui:msg></div>
+            <div ui:field="peakPanel" class="horizontal layout" style="width:100%">
+                <my:TOURowField ui:field="amTOU"/>
+                <div style="width:16px"/>
+                <my:TOURowField ui:field="pmTOU"/>
+            </div>
+        </div>
+
+    </g:HTMLPanel>
+
+</ui:UiBinder>
